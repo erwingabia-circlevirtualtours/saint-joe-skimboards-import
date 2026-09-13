@@ -44,23 +44,23 @@ export const TechAnatomy: React.FC = () => {
   ];
 
   return (
-    <section id="tech-anatomy" className="py-20 bg-brand-charcoal relative overflow-hidden border-b border-brand-border/60">
+    <section id="tech-anatomy" className="py-20 bg-white relative overflow-hidden border-b border-slate-200">
       
       {/* Background Carbon Pattern */}
-      <div className="absolute inset-0 opacity-10 carbon-bg pointer-events-none" />
+      <div className="absolute inset-0 opacity-5 carbon-bg pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-surface border border-brand-cyan/40 text-xs font-mono font-bold uppercase tracking-widest text-brand-cyan">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold uppercase tracking-widest text-sky-800">
             <Layers className="w-3.5 h-3.5" />
             <span>The Saint Joe Anatomy</span>
           </div>
-          <h2 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight text-white">
-            AEROSPACE GRADE <span className="text-gradient-cyan">CONSTRUCTION</span>
+          <h2 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight text-slate-900">
+            AEROSPACE GRADE <span className="text-sky-600">CONSTRUCTION</span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
             Every Saint Joe skimboard is built using high-pressure vacuum infusion techniques derived from aerospace engineering. Here is why our boards dominate the world tour.
           </p>
         </div>
@@ -80,8 +80,8 @@ export const TechAnatomy: React.FC = () => {
                   onClick={() => setActiveLayer(layer.id)}
                   className={`p-5 rounded-2xl border cursor-pointer transition-all ${
                     isSelected
-                      ? 'bg-brand-surface border-brand-cyan shadow-xl ring-1 ring-brand-cyan/80 translate-x-2'
-                      : 'bg-brand-dark/60 border-brand-border/80 hover:bg-brand-surface/70'
+                      ? 'bg-sky-50/60 border-sky-500 shadow-md ring-1 ring-sky-500 translate-x-2'
+                      : 'bg-slate-50/80 border-slate-200 hover:bg-slate-100/80'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-4">
@@ -89,16 +89,16 @@ export const TechAnatomy: React.FC = () => {
                       <div
                         className="w-10 h-10 rounded-xl flex items-center justify-center border"
                         style={{
-                          backgroundColor: `${layer.color}15`,
-                          borderColor: `${layer.color}40`,
-                          color: layer.color
+                          backgroundColor: `${layer.color}18`,
+                          borderColor: `${layer.color}50`,
+                          color: layer.color === '#00f0ff' ? '#0284c7' : layer.color === '#ccff00' ? '#4d7c0f' : layer.color
                         }}
                       >
                         <Icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <h3 className="font-display font-bold text-base text-white">{layer.title}</h3>
-                        <p className="text-xs text-slate-400 font-mono">{layer.subtitle}</p>
+                        <h3 className="font-display font-bold text-base text-slate-900">{layer.title}</h3>
+                        <p className="text-xs text-slate-500 font-mono">{layer.subtitle}</p>
                       </div>
                     </div>
 
@@ -107,7 +107,7 @@ export const TechAnatomy: React.FC = () => {
                       style={{
                         backgroundColor: `${layer.color}15`,
                         borderColor: `${layer.color}40`,
-                        color: layer.color
+                        color: layer.color === '#00f0ff' ? '#0369a1' : layer.color === '#ccff00' ? '#3f6212' : layer.color
                       }}
                     >
                       {layer.stat}
@@ -115,7 +115,7 @@ export const TechAnatomy: React.FC = () => {
                   </div>
 
                   {isSelected && (
-                    <p className="text-xs text-slate-300 mt-3 pt-3 border-t border-white/10 leading-relaxed animate-fade-in">
+                    <p className="text-xs text-slate-600 mt-3 pt-3 border-t border-slate-200 leading-relaxed animate-fade-in">
                       {layer.description}
                     </p>
                   )}
@@ -125,7 +125,7 @@ export const TechAnatomy: React.FC = () => {
           </div>
 
           {/* Right: Exploded Layer Graphic Diagram */}
-          <div className="lg:col-span-6 bg-brand-surface/80 border border-brand-border rounded-3xl p-8 backdrop-blur-xl shadow-2xl flex flex-col items-center justify-center relative min-h-[420px]">
+          <div className="lg:col-span-6 bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-sm flex flex-col items-center justify-center relative min-h-[420px]">
             
             {/* Visual Exploded Skimboard Layers */}
             <div className="w-full max-w-md space-y-4 py-6">
@@ -135,15 +135,15 @@ export const TechAnatomy: React.FC = () => {
                 onClick={() => setActiveLayer(0)}
                 className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between ${
                   activeLayer === 0
-                    ? 'bg-brand-cyan/20 border-brand-cyan scale-105 shadow-lg shadow-cyan-500/20'
-                    : 'bg-brand-dark/80 border-brand-border opacity-60 hover:opacity-100'
+                    ? 'bg-sky-100 border-sky-500 scale-105 shadow-md'
+                    : 'bg-white border-slate-200 hover:border-slate-300'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-6 h-6 rounded-full bg-brand-cyan/20 text-brand-cyan font-mono text-xs font-bold flex items-center justify-center">1</span>
-                  <span className="text-xs font-bold font-mono text-white">EPOXY HIGH-GLOSS UV SHIELD</span>
+                  <span className="w-6 h-6 rounded-full bg-sky-200 text-sky-800 font-mono text-xs font-bold flex items-center justify-center">1</span>
+                  <span className="text-xs font-bold font-mono text-slate-900">EPOXY HIGH-GLOSS UV SHIELD</span>
                 </div>
-                <span className="text-[10px] font-mono text-brand-cyan">LAYER 1</span>
+                <span className="text-[10px] font-mono font-bold text-sky-700">LAYER 1</span>
               </div>
 
               {/* Layer 1: Double Carbon Weave */}
@@ -151,15 +151,15 @@ export const TechAnatomy: React.FC = () => {
                 onClick={() => setActiveLayer(1)}
                 className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between ${
                   activeLayer === 1
-                    ? 'bg-brand-volt/20 border-brand-volt scale-105 shadow-lg shadow-volt-500/20'
-                    : 'bg-brand-dark/80 border-brand-border opacity-60 hover:opacity-100'
+                    ? 'bg-emerald-50 border-emerald-500 scale-105 shadow-md'
+                    : 'bg-white border-slate-200 hover:border-slate-300'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-6 h-6 rounded-full bg-brand-volt/20 text-brand-volt font-mono text-xs font-bold flex items-center justify-center">2</span>
-                  <span className="text-xs font-bold font-mono text-white">3K TORAY CARBON SPREAD-TOW</span>
+                  <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 font-mono text-xs font-bold flex items-center justify-center">2</span>
+                  <span className="text-xs font-bold font-mono text-slate-900">3K TORAY CARBON SPREAD-TOW</span>
                 </div>
-                <span className="text-[10px] font-mono text-brand-volt">LAYER 2</span>
+                <span className="text-[10px] font-mono font-bold text-emerald-700">LAYER 2</span>
               </div>
 
               {/* Layer 2: PVC Foam Core */}
@@ -167,15 +167,15 @@ export const TechAnatomy: React.FC = () => {
                 onClick={() => setActiveLayer(2)}
                 className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between ${
                   activeLayer === 2
-                    ? 'bg-brand-blue/30 border-brand-blue scale-105 shadow-lg shadow-blue-500/20'
-                    : 'bg-brand-dark/80 border-brand-border opacity-60 hover:opacity-100'
+                    ? 'bg-blue-50 border-blue-500 scale-105 shadow-md'
+                    : 'bg-white border-slate-200 hover:border-slate-300'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-6 h-6 rounded-full bg-brand-blue/30 text-brand-cyan font-mono text-xs font-bold flex items-center justify-center">3</span>
-                  <span className="text-xs font-bold font-mono text-white">75kg/m³ CLOSED-CELL PVC CORE</span>
+                  <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-mono text-xs font-bold flex items-center justify-center">3</span>
+                  <span className="text-xs font-bold font-mono text-slate-900">75kg/m³ CLOSED-CELL PVC CORE</span>
                 </div>
-                <span className="text-[10px] font-mono text-brand-cyan">CORE</span>
+                <span className="text-[10px] font-mono font-bold text-blue-700">CORE</span>
               </div>
 
               {/* Layer 3: Kevlar Rails */}
@@ -183,32 +183,32 @@ export const TechAnatomy: React.FC = () => {
                 onClick={() => setActiveLayer(3)}
                 className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between ${
                   activeLayer === 3
-                    ? 'bg-brand-sunset/20 border-brand-sunset scale-105 shadow-lg shadow-sunset-500/20'
-                    : 'bg-brand-dark/80 border-brand-border opacity-60 hover:opacity-100'
+                    ? 'bg-amber-50 border-amber-500 scale-105 shadow-md'
+                    : 'bg-white border-slate-200 hover:border-slate-300'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-6 h-6 rounded-full bg-brand-sunset/20 text-brand-sunset font-mono text-xs font-bold flex items-center justify-center">4</span>
-                  <span className="text-xs font-bold font-mono text-white">KEVLAR ARAMID SHOREBREAK RAILS</span>
+                  <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-800 font-mono text-xs font-bold flex items-center justify-center">4</span>
+                  <span className="text-xs font-bold font-mono text-slate-900">KEVLAR ARAMID SHOREBREAK RAILS</span>
                 </div>
-                <span className="text-[10px] font-mono text-brand-sunset">PERIMETER</span>
+                <span className="text-[10px] font-mono font-bold text-amber-700">PERIMETER</span>
               </div>
 
             </div>
 
             {/* Spec Highlights Matrix */}
-            <div className="w-full grid grid-cols-3 gap-3 pt-4 border-t border-white/10 text-center font-mono text-xs">
-              <div className="bg-brand-dark/50 p-2.5 rounded-xl border border-brand-border">
-                <span className="text-slate-400 block text-[10px]">WEIGHT RATIO</span>
-                <span className="text-brand-volt font-bold text-sm">3.9 - 4.2 LBS</span>
+            <div className="w-full grid grid-cols-3 gap-3 pt-4 border-t border-slate-200 text-center font-mono text-xs">
+              <div className="bg-white p-2.5 rounded-xl border border-slate-200">
+                <span className="text-slate-500 block text-[10px]">WEIGHT RATIO</span>
+                <span className="text-slate-900 font-bold text-sm">3.9 - 4.2 LBS</span>
               </div>
-              <div className="bg-brand-dark/50 p-2.5 rounded-xl border border-brand-border">
-                <span className="text-slate-400 block text-[10px]">TORSIONAL FLEX</span>
-                <span className="text-brand-cyan font-bold text-sm">99.4% REBOUND</span>
+              <div className="bg-white p-2.5 rounded-xl border border-slate-200">
+                <span className="text-slate-500 block text-[10px]">TORSIONAL FLEX</span>
+                <span className="text-sky-700 font-bold text-sm">99.4% REBOUND</span>
               </div>
-              <div className="bg-brand-dark/50 p-2.5 rounded-xl border border-brand-border">
-                <span className="text-slate-400 block text-[10px]">WATERPROOF</span>
-                <span className="text-white font-bold text-sm">100% FOREVER</span>
+              <div className="bg-white p-2.5 rounded-xl border border-slate-200">
+                <span className="text-slate-500 block text-[10px]">WATERPROOF</span>
+                <span className="text-slate-900 font-bold text-sm">100% FOREVER</span>
               </div>
             </div>
 

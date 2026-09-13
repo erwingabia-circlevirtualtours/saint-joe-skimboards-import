@@ -20,7 +20,7 @@ export const PRODUCTS: BoardProduct[] = [
       'Ultra-Rigid High-Density High-Impact PVC Core',
       'Continuous Progressive Nose Rocker with Zero-Drag Flat Tail',
       'Reinforced Kevlar Rail Impact Zones',
-      'Handcrafted & Hand-Laminated in California'
+      'Handcrafted & Hand-Laminated in Tacloban City, Philippines, 6500'
     ],
     specs: {
       core: 'High-Density 75kg/m³ Closed-Cell Structural PVC',
@@ -204,7 +204,7 @@ export const PRODUCTS: BoardProduct[] = [
     badge: 'GROM / YOUTH',
     inStock: true,
     stockCount: 15,
-    description: 'No plastic toys here. The Disciple Grom is built with the exact same aerospace epoxy and high-density foam as our Pro team boards, scaled into proportions that young rippers (under 120 lbs) can throw around with effortless control.',
+    description: 'No plastic toys here. The Disciple Grom is built with the exact same aerospace epoxy and high-density foam as our Pro series boards, scaled into proportions that young rippers (under 120 lbs) can throw around with effortless control.',
     features: [
       'True Epoxy & E-Glass Handcrafted Construction',
       'Lightweight Scaled Foil for Easy Sand Running',

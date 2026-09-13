@@ -35,35 +35,35 @@ export const BoardVisualizer: React.FC<BoardVisualizerProps> = ({
   const isCarbonLayup = config.coreMaterial.includes('Carbon') || config.coreMaterial.includes('Kevlar');
 
   return (
-    <div className="flex flex-col items-center justify-center bg-brand-surface/90 border border-brand-border/80 rounded-3xl p-6 relative overflow-hidden backdrop-blur-xl shadow-2xl">
+    <div className="flex flex-col items-center justify-center bg-white border border-slate-200 rounded-3xl p-6 relative overflow-hidden shadow-lg">
       
       {/* Background Ambient Aura */}
       <div
-        className="absolute -top-24 -left-24 w-72 h-72 rounded-full blur-3xl opacity-30 transition-all duration-700 pointer-events-none"
+        className="absolute -top-24 -left-24 w-72 h-72 rounded-full blur-3xl opacity-15 transition-all duration-700 pointer-events-none"
         style={{ backgroundColor: config.deckColor }}
       />
       <div
-        className="absolute -bottom-24 -right-24 w-72 h-72 rounded-full blur-3xl opacity-30 transition-all duration-700 pointer-events-none"
+        className="absolute -bottom-24 -right-24 w-72 h-72 rounded-full blur-3xl opacity-15 transition-all duration-700 pointer-events-none"
         style={{ backgroundColor: config.deckAccentColor }}
       />
 
       {/* Top Header inside Studio */}
-      <div className="w-full flex items-center justify-between pb-4 border-b border-brand-border/60 z-10">
+      <div className="w-full flex items-center justify-between pb-4 border-b border-slate-200 z-10">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-brand-cyan animate-pulse" />
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-slate-300">
+          <span className="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse" />
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-slate-700">
             Live Spec Render // 2D CAD Preview
           </span>
         </div>
 
         {/* View Switcher: Top Deck vs Bottom Slick */}
-        <div className="flex items-center bg-brand-dark rounded-xl p-1 border border-brand-border">
+        <div className="flex items-center bg-slate-100 rounded-xl p-1 border border-slate-200">
           <button
             onClick={() => setViewSide('top')}
             className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all ${
               viewSide === 'top'
-                ? 'bg-brand-cyan text-brand-dark shadow-md'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-white text-slate-900 shadow-sm border border-slate-200'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             TOP DECK
@@ -72,8 +72,8 @@ export const BoardVisualizer: React.FC<BoardVisualizerProps> = ({
             onClick={() => setViewSide('bottom')}
             className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all ${
               viewSide === 'bottom'
-                ? 'bg-brand-cyan text-brand-dark shadow-md'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-white text-slate-900 shadow-sm border border-slate-200'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             BOTTOM SLICK
@@ -372,38 +372,38 @@ export const BoardVisualizer: React.FC<BoardVisualizerProps> = ({
         </svg>
 
         {/* Floating Spec Tags */}
-        <div className="absolute top-4 left-4 bg-brand-dark/90 border border-brand-border/90 px-3 py-1.5 rounded-xl text-[11px] font-mono shadow-lg">
-          <span className="text-slate-400 block text-[9px]">SHAPE OUTLINE</span>
-          <span className="text-brand-cyan font-bold">{config.shapeName}</span>
+        <div className="absolute top-4 left-4 bg-white/95 border border-slate-200 px-3 py-1.5 rounded-xl text-[11px] font-mono shadow-md">
+          <span className="text-slate-500 block text-[9px]">SHAPE OUTLINE</span>
+          <span className="text-sky-700 font-bold">{config.shapeName}</span>
         </div>
 
-        <div className="absolute bottom-4 right-4 bg-brand-dark/90 border border-brand-border/90 px-3 py-1.5 rounded-xl text-[11px] font-mono shadow-lg text-right">
-          <span className="text-slate-400 block text-[9px]">THICKNESS</span>
-          <span className="text-brand-volt font-bold">{config.thickness}</span>
+        <div className="absolute bottom-4 right-4 bg-white/95 border border-slate-200 px-3 py-1.5 rounded-xl text-[11px] font-mono shadow-md text-right">
+          <span className="text-slate-500 block text-[9px]">THICKNESS</span>
+          <span className="text-slate-900 font-bold">{config.thickness}</span>
         </div>
 
       </div>
 
       {/* Live Estimated Price Bar */}
-      <div className="w-full bg-brand-dark/90 border border-brand-border rounded-2xl p-4 flex items-center justify-between z-10">
+      <div className="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 flex items-center justify-between z-10 shadow-sm">
         <div>
-          <span className="text-[11px] font-mono text-slate-400 block uppercase">Total Custom Investment</span>
+          <span className="text-[11px] font-mono text-slate-500 block uppercase">Total Custom Investment</span>
           <div className="flex items-baseline gap-2">
-            <span className="font-display font-black text-2xl sm:text-3xl text-white">
+            <span className="font-display font-black text-2xl sm:text-3xl text-slate-900">
               ${calculatedPrice}
             </span>
-            <span className="text-xs font-mono text-brand-volt font-bold">
+            <span className="text-xs font-mono text-emerald-600 font-bold">
               FREE SHIPPING ELIGIBLE
             </span>
           </div>
         </div>
 
         <div className="text-right">
-          <span className="text-[10px] font-mono bg-brand-cyan/15 text-brand-cyan px-2 py-1 rounded border border-brand-cyan/30 block font-bold">
+          <span className="text-[10px] font-mono bg-sky-100 text-sky-800 px-2 py-1 rounded border border-sky-200 block font-bold">
             10-14 DAYS LEAD TIME
           </span>
           <span className="text-[10px] text-slate-500 font-mono mt-1 block">
-            Handcrafted in San Clemente
+            Handcrafted in Tacloban City, Philippines, 6500
           </span>
         </div>
       </div>

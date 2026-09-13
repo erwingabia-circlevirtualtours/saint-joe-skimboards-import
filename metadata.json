@@ -1,0 +1,6 @@
+{
+  "name": "Saint Joe Skimboards",
+  "description": "Saint Joe Skimboards, your quality Philippine made skimboards. We’ve been shaping boards since 2009.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

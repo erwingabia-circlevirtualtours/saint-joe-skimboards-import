@@ -39,16 +39,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div
       onClick={() => onQuickView(product)}
-      className="group relative bg-brand-surface hover:bg-brand-surfaceAlt border border-brand-border/80 hover:border-brand-cyan/50 rounded-3xl p-5 transition-all duration-300 flex flex-col justify-between shadow-xl cursor-pointer hover:-translate-y-1.5"
+      className="group relative bg-white hover:bg-slate-50/50 border border-slate-200 hover:border-sky-400 rounded-3xl p-5 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl cursor-pointer hover:-translate-y-1.5"
     >
       {/* Top Card Bar: Badge & Wishlist */}
       <div className="flex items-center justify-between z-10">
         {product.badge ? (
-          <span className="text-[10px] font-mono font-black uppercase px-2.5 py-1 rounded-full bg-brand-cyan/15 text-brand-cyan border border-brand-cyan/30 tracking-wider">
+          <span className="text-[10px] font-mono font-black uppercase px-2.5 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-200 tracking-wider">
             {product.badge}
           </span>
         ) : (
-          <span className="text-[10px] font-mono text-slate-500 uppercase">
+          <span className="text-[10px] font-mono text-slate-400 uppercase">
             {product.specs.tailShape.split(' ')[0]} TAIL
           </span>
         )}
@@ -61,36 +61,36 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           aria-label="Add to Wishlist"
           className={`p-2 rounded-xl border transition-all ${
             isWishlisted
-              ? 'bg-brand-sunset/20 border-brand-sunset text-brand-sunset'
-              : 'bg-brand-dark/60 border-brand-border text-slate-400 hover:text-white'
+              ? 'bg-rose-50 border-rose-200 text-rose-500'
+              : 'bg-slate-100 border-slate-200 text-slate-400 hover:text-rose-500'
           }`}
         >
-          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-brand-sunset' : ''}`} />
+          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-rose-500' : ''}`} />
         </button>
       </div>
 
       {/* Center Visual Skimboard Rendering */}
-      <div className="relative py-8 my-2 flex items-center justify-center min-h-[260px] overflow-hidden">
+      <div className="relative py-8 my-2 flex items-center justify-center min-h-[260px] overflow-hidden bg-slate-50/80 rounded-2xl border border-slate-100">
         
         {/* Glow backdrop based on active color */}
         <div
-          className="absolute w-36 h-56 rounded-full blur-2xl opacity-20 transition-all duration-500"
+          className="absolute w-36 h-56 rounded-full blur-2xl opacity-15 transition-all duration-500"
           style={{ backgroundColor: activeColorway.accentHex }}
         />
 
         {/* Board Shape Representation */}
         <div
-          className="relative w-28 sm:w-32 h-60 sm:h-64 rounded-[42px] border-2 border-brand-border shadow-2xl flex flex-col items-center justify-between p-3.5 transition-all duration-500 transform group-hover:scale-105 group-hover:rotate-1"
+          className="relative w-28 sm:w-32 h-60 sm:h-64 rounded-[42px] border-2 border-slate-300 shadow-xl flex flex-col items-center justify-between p-3.5 transition-all duration-500 transform group-hover:scale-105 group-hover:rotate-1"
           style={{
             background: `linear-gradient(180deg, ${activeColorway.hex} 0%, ${activeColorway.accentHex} 100%)`,
           }}
         >
           {/* Carbon Weave Texture overlay */}
-          <div className="absolute inset-0 rounded-[40px] opacity-35 carbon-bg" />
+          <div className="absolute inset-0 rounded-[40px] opacity-30 carbon-bg" />
 
           {/* Grip Pad Simulation */}
-          <div className="relative z-10 w-16 h-12 rounded-lg bg-black/60 border border-white/10 flex items-center justify-center">
-            <span className="text-[8px] font-mono text-white/70 font-bold">GRIP</span>
+          <div className="relative z-10 w-16 h-12 rounded-lg bg-black/70 border border-white/20 flex items-center justify-center shadow-inner">
+            <span className="text-[8px] font-mono text-white font-bold">GRIP</span>
           </div>
 
           {/* Saint Joe Deck Stamp */}
@@ -99,8 +99,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
 
           {/* Kick Tail Pad Simulation */}
-          <div className="relative z-10 w-20 h-14 rounded-b-[32px] bg-black/70 border-t border-brand-cyan/60 flex items-center justify-center">
-            <span className="text-[8px] font-mono text-brand-cyan font-bold">TAIL KICK</span>
+          <div className="relative z-10 w-20 h-14 rounded-b-[32px] bg-black/80 border-t border-sky-400/80 flex items-center justify-center shadow-inner">
+            <span className="text-[8px] font-mono text-sky-300 font-bold">TAIL KICK</span>
           </div>
         </div>
 
@@ -111,7 +111,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               e.stopPropagation();
               onQuickView(product);
             }}
-            className="px-4 py-2 rounded-xl bg-brand-dark/95 text-brand-cyan border border-brand-cyan/40 text-xs font-mono font-bold flex items-center gap-1.5 shadow-xl hover:bg-brand-cyan hover:text-brand-dark transition-all"
+            className="px-4 py-2 rounded-xl bg-white text-sky-700 border border-sky-300 text-xs font-mono font-bold flex items-center gap-1.5 shadow-lg hover:bg-sky-50 transition-all"
           >
             <Eye className="w-3.5 h-3.5" /> Quick Specs
           </button>
@@ -124,14 +124,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Title & Signature Rider */}
         <div>
           {product.signatureRider && (
-            <p className="text-[10px] font-mono text-brand-volt font-bold uppercase tracking-wider mb-0.5">
+            <p className="text-[10px] font-mono text-sky-700 font-bold uppercase tracking-wider mb-0.5">
               ★ {product.signatureRider} Pro Model
             </p>
           )}
-          <h3 className="font-display font-black text-lg text-white group-hover:text-brand-cyan transition-colors leading-tight">
+          <h3 className="font-display font-black text-lg text-slate-900 group-hover:text-sky-600 transition-colors leading-tight">
             {product.name}
           </h3>
-          <p className="text-xs text-slate-400 line-clamp-1 mt-0.5">{product.subtitle}</p>
+          <p className="text-xs text-slate-500 line-clamp-1 mt-0.5">{product.subtitle}</p>
         </div>
 
         {/* Colorway Swatches */}
@@ -148,8 +148,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 title={cw.name}
                 className={`w-4 h-4 rounded-full border transition-all ${
                   selectedColorIdx === idx
-                    ? 'ring-2 ring-brand-cyan scale-110 border-white'
-                    : 'border-white/30 hover:scale-105'
+                    ? 'ring-2 ring-sky-500 scale-110 border-white'
+                    : 'border-slate-300 hover:scale-105'
                 }`}
                 style={{
                   background: `linear-gradient(135deg, ${cw.hex} 0%, ${cw.accentHex} 100%)`
@@ -160,15 +160,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Rating & In-Stock Count */}
-        <div className="flex items-center justify-between text-xs font-mono text-slate-400 pt-1 border-t border-white/5">
-          <div className="flex items-center gap-1 text-amber-400">
+        <div className="flex items-center justify-between text-xs font-mono text-slate-500 pt-1 border-t border-slate-100">
+          <div className="flex items-center gap-1 text-amber-500">
             <Star className="w-3.5 h-3.5 fill-amber-400" />
-            <span className="font-bold text-white">{product.rating}</span>
-            <span className="text-[11px] text-slate-500">({product.reviewCount})</span>
+            <span className="font-bold text-slate-900">{product.rating}</span>
+            <span className="text-[11px] text-slate-400">({product.reviewCount})</span>
           </div>
 
-          <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-[10px] text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             {product.stockCount} IN STOCK
           </span>
         </div>
@@ -176,13 +176,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Price & Action Button */}
         <div className="pt-2 flex items-center justify-between gap-3">
           <div>
-            <span className="text-[10px] font-mono text-slate-500 block uppercase">Price</span>
+            <span className="text-[10px] font-mono text-slate-400 block uppercase">Price</span>
             <div className="flex items-baseline gap-1.5">
-              <span className="font-display font-black text-xl text-white">
+              <span className="font-display font-black text-xl text-slate-900">
                 ${product.price}
               </span>
               {product.originalPrice && (
-                <span className="text-xs font-mono text-slate-500 line-through">
+                <span className="text-xs font-mono text-slate-400 line-through">
                   ${product.originalPrice}
                 </span>
               )}
@@ -191,7 +191,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
           <button
             onClick={handleDirectAdd}
-            className="flex-1 max-w-[140px] px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-brand-cyan to-brand-blue hover:brightness-110 text-brand-dark font-display font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md transition-all"
+            className="flex-1 max-w-[140px] px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-display font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-sm transition-all"
           >
             <ShoppingBag className="w-3.5 h-3.5 stroke-[2.5]" />
             <span>Add to Cart</span>

@@ -1,101 +1,104 @@
 import React, { useState } from 'react';
-import { TEAM_RIDERS } from '../../data/teamRiders';
-import { TeamRider } from '../../types';
-import { Users, Award, MapPin, Quote, ArrowRight } from 'lucide-react';
+import { PRO_SPOTS } from '../../data/proSpots';
+import { ProSpot } from '../../types';
+import { MapPin, Compass, Quote, ArrowRight, Sparkles } from 'lucide-react';
 
 export const TeamShowcase: React.FC = () => {
-  const [selectedRider, setSelectedRider] = useState<TeamRider>(TEAM_RIDERS[0]);
+  const [selectedSpot, setSelectedSpot] = useState<ProSpot>(PRO_SPOTS[0]);
 
   return (
-    <section id="team-riders" className="py-20 bg-brand-charcoal relative overflow-hidden border-b border-brand-border/60">
+    <section id="pro-spots" className="py-20 bg-white relative overflow-hidden border-b border-slate-200">
+      {/* Compatibility anchor */}
+      <div id="team-riders" className="absolute -top-10" />
       
       {/* Carbon Texture */}
-      <div className="absolute inset-0 opacity-10 carbon-bg pointer-events-none" />
+      <div className="absolute inset-0 opacity-5 carbon-bg pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-surface border border-brand-cyan/40 text-xs font-mono font-bold uppercase tracking-widest text-brand-cyan mb-3">
-              <Users className="w-3.5 h-3.5" />
-              <span>World Champion Quiver Athletes</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold uppercase tracking-widest text-sky-800 mb-3">
+              <Compass className="w-3.5 h-3.5 text-sky-600" />
+              <span>Top Philippine Skim Destinations</span>
             </div>
-            <h2 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight text-white">
-              THE SAINT JOE <span className="text-gradient-cyan">PRO TEAM</span>
+            <h2 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight text-slate-900">
+              PHILIPPINE <span className="text-sky-600">PRO SPOTS</span>
             </h2>
           </div>
-          <p className="text-sm text-slate-400 max-w-md">
-            Tested in the world’s heaviest shorebreak arenas from Cabo to Rio de Janeiro. Meet the riders pushing the limits of skimboarding.
+          <p className="text-sm text-slate-600 max-w-md">
+            From the world-class shorebreak barrels of Dahican in Mati to the legendary wedges of Leyte. Discover where Saint Joe skimboards dominate the coast.
           </p>
         </div>
 
-        {/* Featured Rider Spotlight & Selector Grid */}
+        {/* Featured Spot Spotlight & Selector Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Main Selected Rider Spotlight */}
-          <div className="lg:col-span-7 bg-brand-surface border border-brand-border rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between">
+          {/* Main Selected Spot Spotlight */}
+          <div className="lg:col-span-7 bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden shadow-sm flex flex-col justify-between">
             
             {/* Action Shot Banner */}
             <div className="relative h-72 sm:h-80 w-full overflow-hidden">
               <img
-                src={selectedRider.actionShot}
-                alt={selectedRider.name}
-                className="w-full h-full object-cover object-center filter brightness-90 contrast-110"
+                src={selectedSpot.image}
+                alt={selectedSpot.name}
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover object-center filter brightness-95"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-surface via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-transparent" />
               
               {/* Location Badge */}
-              <div className="absolute top-4 left-4 bg-brand-dark/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-brand-border text-xs font-mono text-white flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-brand-cyan" />
-                <span>{selectedRider.location}</span>
+              <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-200 text-xs font-mono text-slate-800 flex items-center gap-1.5 shadow-sm">
+                <MapPin className="w-3.5 h-3.5 text-sky-600" />
+                <span className="font-semibold">{selectedSpot.location}</span>
               </div>
 
-              <div className="absolute top-4 right-4 bg-brand-dark/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-brand-border text-xs font-mono text-brand-volt font-bold">
-                {selectedRider.stance.toUpperCase()} STANCE
+              <div className="absolute top-4 right-4 bg-sky-600 text-white px-3 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider shadow-sm">
+                {selectedSpot.waveType}
               </div>
             </div>
 
-            {/* Rider Info Body */}
+            {/* Spot Info Body */}
             <div className="p-6 sm:p-8 space-y-6">
               
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <h3 className="font-display font-black text-3xl text-white uppercase">
-                    {selectedRider.name}
+                  <h3 className="font-display font-black text-3xl text-slate-900 uppercase">
+                    {selectedSpot.name}
                   </h3>
-                  <p className="text-xs font-mono text-brand-cyan font-semibold">{selectedRider.handle}</p>
+                  <p className="text-xs font-mono text-sky-700 font-semibold">{selectedSpot.tag}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-1.5">
-                  {selectedRider.titles.map((t, idx) => (
+                  {selectedSpot.highlights.map((highlight, idx) => (
                     <span
                       key={idx}
-                      className="text-[10px] font-mono font-bold bg-brand-volt/15 text-brand-volt border border-brand-volt/30 px-2.5 py-1 rounded-full flex items-center gap-1"
+                      className="text-[10px] font-mono font-bold bg-sky-100 text-sky-800 border border-sky-200 px-2.5 py-1 rounded-full flex items-center gap-1"
                     >
-                      <Award className="w-3 h-3" /> {t}
+                      <Sparkles className="w-3 h-3 text-sky-600" /> {highlight}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Quote */}
-              <div className="p-4 bg-brand-dark/70 rounded-2xl border border-brand-border relative">
-                <Quote className="w-6 h-6 text-brand-cyan/30 absolute top-3 right-3" />
-                <p className="text-xs sm:text-sm italic text-slate-300 relative z-10 leading-relaxed">
-                  "{selectedRider.quote}"
+              {/* Blurb */}
+              <div className="p-4 bg-white rounded-2xl border border-slate-200 relative shadow-sm">
+                <Quote className="w-6 h-6 text-sky-200 absolute top-3 right-3" />
+                <p className="text-xs sm:text-sm italic text-slate-700 relative z-10 leading-relaxed">
+                  "{selectedSpot.blurb}"
                 </p>
               </div>
 
-              {/* Signature Board Link */}
-              <div className="p-4 bg-brand-surfaceAlt rounded-2xl border border-brand-cyan/30 flex items-center justify-between">
+              {/* Recommended Board Link */}
+              <div className="p-4 bg-white rounded-2xl border border-slate-200 flex items-center justify-between shadow-sm">
                 <div>
-                  <span className="text-[10px] font-mono uppercase text-slate-400 block">CURRENT WEAPON OF CHOICE</span>
-                  <p className="font-display font-black text-base text-white">{selectedRider.signatureBoardName}</p>
+                  <span className="text-[10px] font-mono uppercase text-slate-500 block">RECOMMENDED WEAPON OF CHOICE</span>
+                  <p className="font-display font-black text-base text-slate-900">{selectedSpot.recommendedBoardName}</p>
                 </div>
                 <a
                   href="#catalog"
-                  className="px-4 py-2 rounded-xl bg-brand-cyan text-brand-dark font-bold text-xs uppercase font-mono hover:bg-cyan-300 transition-colors flex items-center gap-1"
+                  className="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs uppercase font-mono hover:bg-slate-800 transition-colors flex items-center gap-1 shadow-sm"
                 >
                   <span>Shop Board</span> <ArrowRight className="w-3.5 h-3.5" />
                 </a>
@@ -105,37 +108,43 @@ export const TeamShowcase: React.FC = () => {
 
           </div>
 
-          {/* Right: Team Selection Thumbnails */}
+          {/* Right: Spot Selection Thumbnails */}
           <div className="lg:col-span-5 space-y-4">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 block mb-2">
-              Select Team Rider
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 block mb-2">
+              Select Pro Spot
             </span>
 
-            {TEAM_RIDERS.map((rider) => {
-              const isSelected = selectedRider.id === rider.id;
+            {PRO_SPOTS.map((spot) => {
+              const isSelected = selectedSpot.id === spot.id;
               return (
                 <div
-                  key={rider.id}
-                  onClick={() => setSelectedRider(rider)}
+                  key={spot.id}
+                  onClick={() => setSelectedSpot(spot)}
                   className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-center gap-4 ${
                     isSelected
-                      ? 'bg-brand-surface border-brand-cyan ring-1 ring-brand-cyan shadow-xl translate-x-1'
-                      : 'bg-brand-dark/60 border-brand-border hover:bg-brand-surface/70'
+                      ? 'bg-sky-50/70 border-sky-500 ring-1 ring-sky-500 shadow-md translate-x-1'
+                      : 'bg-slate-50 border-slate-200 hover:bg-slate-100'
                   }`}
                 >
                   <img
-                    src={rider.avatar}
-                    alt={rider.name}
-                    className="w-14 h-14 rounded-2xl object-cover border-2 border-brand-border flex-shrink-0"
+                    src={spot.thumbnail}
+                    alt={spot.name}
+                    referrerPolicy="no-referrer"
+                    className="w-14 h-14 rounded-2xl object-cover border-2 border-slate-200 flex-shrink-0"
                   />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <h4 className="font-display font-bold text-base text-white truncate">{rider.name}</h4>
-                      <span className="text-[10px] font-mono text-slate-500">{rider.stance}</span>
+                      <h4 className="font-display font-bold text-base text-slate-900 truncate">{spot.name}</h4>
+                      <span className="text-[10px] font-mono font-semibold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-full truncate ml-2">
+                        {spot.waveType}
+                      </span>
                     </div>
-                    <p className="text-xs text-slate-400 font-mono">{rider.location}</p>
-                    <p className="text-[11px] text-brand-cyan font-mono truncate mt-0.5">
-                      Signature: {rider.signatureBoardName}
+                    <p className="text-xs text-slate-500 font-mono flex items-center gap-1 mt-0.5">
+                      <MapPin className="w-3 h-3 text-sky-600 flex-shrink-0" />
+                      <span className="truncate">{spot.location}</span>
+                    </p>
+                    <p className="text-[11px] text-slate-600 font-mono truncate mt-0.5 font-medium">
+                      Setup: {spot.recommendedBoardName}
                     </p>
                   </div>
                 </div>
@@ -150,3 +159,6 @@ export const TeamShowcase: React.FC = () => {
     </section>
   );
 };
+
+export const ProSpotsShowcase = TeamShowcase;
+

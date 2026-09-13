@@ -105,21 +105,21 @@ export const CustomBuilder: React.FC = () => {
   };
 
   return (
-    <section id="custom-builder" className="py-20 bg-brand-dark relative overflow-hidden border-b border-brand-border/60">
+    <section id="custom-builder" className="py-20 bg-slate-50 relative overflow-hidden border-b border-slate-200">
       
       {/* Background Accent Lines */}
-      <div className="absolute inset-0 opacity-15 tech-hazard-stripes pointer-events-none" />
+      <div className="absolute inset-0 opacity-10 tech-hazard-stripes pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-surface border border-brand-cyan/40 text-xs font-mono font-bold uppercase tracking-widest text-brand-cyan mb-3">
-              <Sliders className="w-3.5 h-3.5 text-brand-volt animate-spin" />
-              <span>San Clemente Custom Craft Studio</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-xs font-mono font-bold uppercase tracking-widest text-sky-700 mb-3 shadow-sm">
+              <Sliders className="w-3.5 h-3.5 text-sky-600 animate-spin" />
+              <span>Tacloban City, Philippines, 6500 Custom Studio</span>
             </div>
-            <h2 className="font-display font-black text-3xl sm:text-5xl tracking-tight uppercase text-white">
+            <h2 className="font-display font-black text-3xl sm:text-5xl tracking-tight uppercase text-slate-900">
               BUILD YOUR <span className="text-gradient-cyan">DREAM BOARD</span>
             </h2>
           </div>
@@ -127,15 +127,15 @@ export const CustomBuilder: React.FC = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={resetConfig}
-              className="px-3.5 py-2 rounded-xl bg-brand-surface border border-brand-border text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors"
+              className="px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs font-mono text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 transition-colors shadow-sm"
             >
               <RotateCcw className="w-3.5 h-3.5" /> Reset
             </button>
             <button
               onClick={handleShare}
-              className="px-3.5 py-2 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-cyan text-xs font-mono text-slate-300 hover:text-brand-cyan flex items-center gap-1.5 transition-colors"
+              className="px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:border-sky-400 text-xs font-mono text-slate-700 hover:text-sky-700 flex items-center gap-1.5 transition-colors shadow-sm"
             >
-              {copiedLink ? <Check className="w-3.5 h-3.5 text-brand-volt" /> : <Share2 className="w-3.5 h-3.5" />}
+              {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
               {copiedLink ? 'Config Copied!' : 'Share Setup'}
             </button>
           </div>

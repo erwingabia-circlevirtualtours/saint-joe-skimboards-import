@@ -12,11 +12,11 @@ export const Badge: React.FC<BadgeProps> = ({
   className = '',
 }) => {
   const styles = {
-    cyan: 'bg-brand-cyan/15 text-brand-cyan border-brand-cyan/30',
-    volt: 'bg-brand-volt/15 text-brand-volt border-brand-volt/30',
-    sunset: 'bg-brand-sunset/15 text-brand-sunset border-brand-sunset/30',
-    dark: 'bg-slate-800/80 text-slate-200 border-slate-700',
-    outline: 'bg-transparent text-slate-300 border-slate-700',
+    cyan: 'bg-sky-50 text-sky-800 border-sky-200',
+    volt: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+    sunset: 'bg-amber-50 text-amber-800 border-amber-200',
+    dark: 'bg-slate-900 text-white border-slate-800',
+    outline: 'bg-white text-slate-700 border-slate-200',
   };
 
   return (

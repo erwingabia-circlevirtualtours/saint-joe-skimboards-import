@@ -75,6 +75,20 @@ export interface CartItem {
   customConfig?: CustomBoardConfig;
 }
 
+export interface ProSpot {
+  id: string;
+  name: string;
+  location: string;
+  tag: string;
+  highlights: string[];
+  recommendedBoardId: string;
+  recommendedBoardName: string;
+  blurb: string;
+  image: string;
+  thumbnail: string;
+  waveType: string;
+}
+
 export interface TeamRider {
   id: string;
   name: string;
@@ -101,4 +115,5 @@ export interface CustomerReview {
   comment: string;
   verified: boolean;
   riderWeight?: string;
+  source?: string;
 }

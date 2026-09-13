@@ -34,7 +34,7 @@ export const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-brand-dark text-slate-100 flex flex-col selection:bg-brand-cyan selection:text-brand-dark">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-sky-500/20 selection:text-sky-950">
       
       {/* Top Announcements */}
       <AnnouncementBar />
@@ -71,7 +71,7 @@ export const AppContent: React.FC = () => {
         {/* Interactive Sizing & Weight Calculator */}
         <SizingCalculator />
 
-        {/* Pro Team Showcase */}
+        {/* Philippine Pro Spots Showcase */}
         <TeamShowcase />
 
         {/* Verified Reviews & Community Feed */}

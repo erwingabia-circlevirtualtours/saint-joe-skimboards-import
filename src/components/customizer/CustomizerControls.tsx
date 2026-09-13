@@ -48,18 +48,18 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
   ];
 
   return (
-    <div className="bg-brand-surface border border-brand-border rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+    <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
       
       {/* Step Tabs Navigation */}
-      <div className="flex items-center gap-1 overflow-x-auto pb-4 mb-6 border-b border-brand-border/60 scrollbar-none">
+      <div className="flex items-center gap-1 overflow-x-auto pb-4 mb-6 border-b border-slate-200 scrollbar-none">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
             className={`px-3.5 py-2 rounded-xl text-xs font-mono font-bold whitespace-nowrap transition-all ${
               activeTab === tab.id
-                ? 'bg-brand-cyan text-brand-dark shadow-md'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-slate-900 text-white shadow-md'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
             {tab.label}
@@ -75,10 +75,10 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
           <div className="space-y-6 animate-fade-in">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300">
+                <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700">
                   Select Board Profile & Tail Shape
                 </label>
-                <span className="text-[11px] font-mono text-brand-cyan">Tail geometry tuned for shorebreak</span>
+                <span className="text-[11px] font-mono text-sky-700">Tail geometry tuned for shorebreak</span>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -94,22 +94,22 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       })}
                       className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                         isSelected
-                          ? 'bg-brand-surfaceAlt border-brand-cyan shadow-md ring-1 ring-brand-cyan'
-                          : 'bg-brand-dark/60 border-brand-border hover:border-slate-500'
+                          ? 'bg-sky-50 border-sky-500 shadow-sm ring-1 ring-sky-500'
+                          : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-bold text-white">{shape.name}</span>
+                        <span className="text-sm font-bold text-slate-900">{shape.name}</span>
                         {shape.badge && (
-                          <span className="text-[9px] font-mono font-bold bg-brand-cyan/20 text-brand-cyan px-1.5 py-0.5 rounded">
+                          <span className="text-[9px] font-mono font-bold bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded">
                             {shape.badge}
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-slate-400 line-clamp-2 mt-1">{shape.description}</p>
-                      <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                      <p className="text-xs text-slate-600 line-clamp-2 mt-1">{shape.description}</p>
+                      <div className="mt-3 pt-2 border-t border-slate-200 flex items-center justify-between text-xs font-mono">
                         <span className="text-slate-500">Base Price:</span>
-                        <span className="text-brand-volt font-bold">${shape.basePrice}</span>
+                        <span className="text-slate-900 font-bold">${shape.basePrice}</span>
                       </div>
                     </div>
                   );
@@ -119,7 +119,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
 
             {/* Sizing selection */}
             <div>
-              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 block mb-3">
+              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 block mb-3">
                 Board Size & Rider Target Weight
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -131,13 +131,13 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       onClick={() => onChange({ size: size.name as any })}
                       className={`p-3 rounded-xl border text-left transition-all ${
                         isSelected
-                          ? 'bg-brand-cyan/15 border-brand-cyan text-white'
-                          : 'bg-brand-dark/50 border-brand-border text-slate-400 hover:text-white'
+                          ? 'bg-sky-50 border-sky-500 text-slate-900 shadow-sm ring-1 ring-sky-500'
+                          : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900'
                       }`}
                     >
-                      <span className="text-xs font-bold block text-white">{size.name}</span>
-                      <span className="text-[10px] font-mono text-slate-400 block mt-0.5">{size.dimensions}</span>
-                      <span className="text-[9px] font-mono text-brand-cyan block mt-1">{size.riderWeight}</span>
+                      <span className="text-xs font-bold block text-slate-900">{size.name}</span>
+                      <span className="text-[10px] font-mono text-slate-500 block mt-0.5">{size.dimensions}</span>
+                      <span className="text-[9px] font-mono text-sky-700 block mt-1">{size.riderWeight}</span>
                     </button>
                   );
                 })}
@@ -149,7 +149,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         {/* TAB 2: CORE & LAYUP */}
         {activeTab === 'layup' && (
           <div className="space-y-5 animate-fade-in">
-            <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 block">
+            <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 block">
               Core Material & Fiber Layup Matrix
             </label>
             
@@ -164,21 +164,21 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                     })}
                     className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-start justify-between ${
                       isSelected
-                        ? 'bg-brand-surfaceAlt border-brand-cyan ring-1 ring-brand-cyan'
-                        : 'bg-brand-dark/60 border-brand-border hover:border-slate-500'
+                        ? 'bg-sky-50 border-sky-500 ring-1 ring-sky-500 shadow-sm'
+                        : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                     }`}
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-white">{core.name}</span>
-                        <span className="text-[10px] font-mono font-bold bg-brand-volt/20 text-brand-volt px-1.5 py-0.5 rounded">
+                        <span className="text-sm font-bold text-slate-900">{core.name}</span>
+                        <span className="text-[10px] font-mono font-bold bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded">
                           {core.tag}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-400">{core.subtitle}</p>
+                      <p className="text-xs text-slate-600">{core.subtitle}</p>
                       <div className="flex flex-wrap gap-2 pt-2">
                         {core.features.map((f, i) => (
-                          <span key={i} className="text-[10px] font-mono text-slate-400 bg-brand-dark px-2 py-0.5 rounded border border-white/5">
+                          <span key={i} className="text-[10px] font-mono text-slate-600 bg-white px-2 py-0.5 rounded border border-slate-200">
                             ✓ {f}
                           </span>
                         ))}
@@ -186,7 +186,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                     </div>
 
                     <div className="text-right flex-shrink-0 ml-4">
-                      <span className="text-xs font-mono font-bold text-brand-cyan">
+                      <span className="text-xs font-mono font-bold text-sky-700">
                         {core.price === 0 ? 'Included' : `+$${core.price}`}
                       </span>
                     </div>
@@ -200,14 +200,14 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
               <div
                 onClick={() => onChange({ carbonRails: !config.carbonRails })}
                 className={`p-3.5 rounded-xl border cursor-pointer flex items-center justify-between ${
-                  config.carbonRails ? 'bg-brand-surfaceAlt border-brand-cyan' : 'bg-brand-dark/50 border-brand-border'
+                  config.carbonRails ? 'bg-sky-50 border-sky-500' : 'bg-slate-50 border-slate-200'
                 }`}
               >
                 <div>
-                  <p className="text-xs font-bold text-white">Wrap Carbon Rails</p>
-                  <p className="text-[10px] text-slate-400 font-mono">Reinforced sandbar rock impact zone</p>
+                  <p className="text-xs font-bold text-slate-900">Wrap Carbon Rails</p>
+                  <p className="text-[10px] text-slate-500 font-mono">Reinforced sandbar rock impact zone</p>
                 </div>
-                <div className={`w-5 h-5 rounded-md flex items-center justify-center border ${config.carbonRails ? 'bg-brand-cyan text-brand-dark border-brand-cyan' : 'border-slate-600'}`}>
+                <div className={`w-5 h-5 rounded-md flex items-center justify-center border ${config.carbonRails ? 'bg-sky-600 text-white border-sky-600' : 'border-slate-300 bg-white'}`}>
                   {config.carbonRails && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                 </div>
               </div>
@@ -215,14 +215,14 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
               <div
                 onClick={() => onChange({ carbonStringer: !config.carbonStringer })}
                 className={`p-3.5 rounded-xl border cursor-pointer flex items-center justify-between ${
-                  config.carbonStringer ? 'bg-brand-surfaceAlt border-brand-cyan' : 'bg-brand-dark/50 border-brand-border'
+                  config.carbonStringer ? 'bg-sky-50 border-sky-500' : 'bg-slate-50 border-slate-200'
                 }`}
               >
                 <div>
-                  <p className="text-xs font-bold text-white">Center Carbon Stringer</p>
-                  <p className="text-[10px] text-slate-400 font-mono">Torsional spring recoil beam</p>
+                  <p className="text-xs font-bold text-slate-900">Center Carbon Stringer</p>
+                  <p className="text-[10px] text-slate-500 font-mono">Torsional spring recoil beam</p>
                 </div>
-                <div className={`w-5 h-5 rounded-md flex items-center justify-center border ${config.carbonStringer ? 'bg-brand-cyan text-brand-dark border-brand-cyan' : 'border-slate-600'}`}>
+                <div className={`w-5 h-5 rounded-md flex items-center justify-center border ${config.carbonStringer ? 'bg-sky-600 text-white border-sky-600' : 'border-slate-300 bg-white'}`}>
                   {config.carbonStringer && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                 </div>
               </div>
@@ -234,7 +234,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         {activeTab === 'art' && (
           <div className="space-y-6 animate-fade-in">
             <div>
-              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 block mb-3">
+              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 block mb-3">
                 Curated Resin Art & Colorway
               </label>
               
@@ -252,22 +252,22 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       })}
                       className={`p-3 rounded-xl border cursor-pointer flex items-center gap-3 transition-all ${
                         isSelected
-                          ? 'bg-brand-surfaceAlt border-brand-cyan shadow-md ring-1 ring-brand-cyan'
-                          : 'bg-brand-dark/60 border-brand-border hover:border-slate-500'
+                          ? 'bg-sky-50 border-sky-500 shadow-sm ring-1 ring-sky-500'
+                          : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                       }`}
                     >
                       {/* Color Preview Swatch */}
                       <div
-                        className="w-10 h-10 rounded-xl border border-white/20 flex-shrink-0 shadow-inner"
+                        className="w-10 h-10 rounded-xl border border-slate-300 flex-shrink-0 shadow-sm"
                         style={{
                           background: `linear-gradient(135deg, ${tint.deckColor} 0%, ${tint.deckAccentColor} 100%)`
                         }}
                       />
                       <div className="flex-1 min-w-0">
-                        <span className="text-xs font-bold text-white block truncate">{tint.name}</span>
-                        <span className="text-[10px] font-mono text-slate-400 block">{tint.type}</span>
+                        <span className="text-xs font-bold text-slate-900 block truncate">{tint.name}</span>
+                        <span className="text-[10px] font-mono text-slate-500 block">{tint.type}</span>
                       </div>
-                      {isSelected && <Check className="w-4 h-4 text-brand-cyan flex-shrink-0" />}
+                      {isSelected && <Check className="w-4 h-4 text-sky-600 flex-shrink-0" />}
                     </div>
                   );
                 })}
@@ -275,13 +275,13 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
             </div>
 
             {/* Custom Deck Color Picker */}
-            <div className="p-4 bg-brand-dark/70 rounded-2xl border border-brand-border space-y-3">
-              <span className="text-xs font-mono uppercase text-slate-300 font-bold block">
+            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+              <span className="text-xs font-mono uppercase text-slate-700 font-bold block">
                 Custom Color Adjustments
               </span>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[11px] font-mono text-slate-400 block mb-1.5">Primary Deck Tint</label>
+                  <label className="text-[11px] font-mono text-slate-500 block mb-1.5">Primary Deck Tint</label>
                   <div className="flex items-center gap-2">
                     <input
                       type="color"
@@ -289,11 +289,11 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       onChange={(e) => onChange({ deckColor: e.target.value })}
                       className="w-8 h-8 rounded-lg cursor-pointer bg-transparent border-0 p-0"
                     />
-                    <span className="text-xs font-mono text-slate-300">{config.deckColor}</span>
+                    <span className="text-xs font-mono text-slate-700">{config.deckColor}</span>
                   </div>
                 </div>
                 <div>
-                  <label className="text-[11px] font-mono text-slate-400 block mb-1.5">Accent Tint</label>
+                  <label className="text-[11px] font-mono text-slate-500 block mb-1.5">Accent Tint</label>
                   <div className="flex items-center gap-2">
                     <input
                       type="color"
@@ -301,7 +301,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       onChange={(e) => onChange({ deckAccentColor: e.target.value })}
                       className="w-8 h-8 rounded-lg cursor-pointer bg-transparent border-0 p-0"
                     />
-                    <span className="text-xs font-mono text-slate-300">{config.deckAccentColor}</span>
+                    <span className="text-xs font-mono text-slate-700">{config.deckAccentColor}</span>
                   </div>
                 </div>
               </div>
@@ -311,17 +311,17 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
             <div
               onClick={() => onChange({ includeSaintJoeLogo: !config.includeSaintJoeLogo })}
               className={`p-3.5 rounded-xl border cursor-pointer flex items-center justify-between ${
-                config.includeSaintJoeLogo ? 'bg-brand-surfaceAlt border-brand-cyan' : 'bg-brand-dark/50 border-brand-border'
+                config.includeSaintJoeLogo ? 'bg-sky-50 border-sky-500' : 'bg-slate-50 border-slate-200'
               }`}
             >
               <div className="flex items-center gap-3">
-                <img src="/saint-joe-logo.jpg" alt="Logo" className="w-8 h-8 rounded-lg object-cover" />
+                <img src="/saint-joe-logo.jpg" alt="Logo" className="w-8 h-8 rounded-lg object-cover border border-slate-200" />
                 <div>
-                  <p className="text-xs font-bold text-white">Saint Joe Iconic Emblem Lamination</p>
-                  <p className="text-[10px] text-slate-400 font-mono">Hand-placed fiberglass deck emblem</p>
+                  <p className="text-xs font-bold text-slate-900">Saint Joe Iconic Emblem Lamination</p>
+                  <p className="text-[10px] text-slate-500 font-mono">Hand-placed fiberglass deck emblem</p>
                 </div>
               </div>
-              <div className={`w-5 h-5 rounded-md flex items-center justify-center border ${config.includeSaintJoeLogo ? 'bg-brand-cyan text-brand-dark border-brand-cyan' : 'border-slate-600'}`}>
+              <div className={`w-5 h-5 rounded-md flex items-center justify-center border ${config.includeSaintJoeLogo ? 'bg-sky-600 text-white border-sky-600' : 'border-slate-300 bg-white'}`}>
                 {config.includeSaintJoeLogo && <Check className="w-3.5 h-3.5 stroke-[3]" />}
               </div>
             </div>
@@ -332,7 +332,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         {activeTab === 'rocker' && (
           <div className="space-y-6 animate-fade-in">
             <div>
-              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 block mb-3">
+              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 block mb-3">
                 Rocker Profile Configuration
               </label>
               <div className="space-y-2.5">
@@ -344,15 +344,15 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       onClick={() => onChange({ rocker: rocker.name as any })}
                       className={`p-3.5 rounded-xl border cursor-pointer flex items-center justify-between transition-all ${
                         isSelected
-                          ? 'bg-brand-surfaceAlt border-brand-cyan ring-1 ring-brand-cyan'
-                          : 'bg-brand-dark/60 border-brand-border hover:border-slate-500'
+                          ? 'bg-sky-50 border-sky-500 ring-1 ring-sky-500 shadow-sm'
+                          : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                       }`}
                     >
                       <div>
-                        <p className="text-xs font-bold text-white">{rocker.name}</p>
-                        <p className="text-[11px] text-slate-400">{rocker.description}</p>
+                        <p className="text-xs font-bold text-slate-900">{rocker.name}</p>
+                        <p className="text-[11px] text-slate-600">{rocker.description}</p>
                       </div>
-                      <span className="text-xs font-mono font-bold text-brand-cyan ml-2 flex-shrink-0">
+                      <span className="text-xs font-mono font-bold text-sky-700 ml-2 flex-shrink-0">
                         {rocker.price === 0 ? 'Included' : `+$${rocker.price}`}
                       </span>
                     </div>
@@ -362,7 +362,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
             </div>
 
             <div>
-              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 block mb-3">
+              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 block mb-3">
                 Board Foil Thickness
               </label>
               <div className="space-y-2.5">
@@ -374,15 +374,15 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       onClick={() => onChange({ thickness: thick.name as any })}
                       className={`p-3.5 rounded-xl border cursor-pointer flex items-center justify-between transition-all ${
                         isSelected
-                          ? 'bg-brand-surfaceAlt border-brand-cyan ring-1 ring-brand-cyan'
-                          : 'bg-brand-dark/60 border-brand-border hover:border-slate-500'
+                          ? 'bg-sky-50 border-sky-500 ring-1 ring-sky-500 shadow-sm'
+                          : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                       }`}
                     >
                       <div>
-                        <p className="text-xs font-bold text-white">{thick.name}</p>
-                        <p className="text-[11px] text-slate-400">{thick.description}</p>
+                        <p className="text-xs font-bold text-slate-900">{thick.name}</p>
+                        <p className="text-[11px] text-slate-600">{thick.description}</p>
                       </div>
-                      <span className="text-xs font-mono font-bold text-brand-volt ml-2 flex-shrink-0">
+                      <span className="text-xs font-mono font-bold text-sky-700 ml-2 flex-shrink-0">
                         {thick.price === 0 ? 'Standard' : `+$${thick.price}`}
                       </span>
                     </div>
@@ -397,7 +397,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         {activeTab === 'traction' && (
           <div className="space-y-6 animate-fade-in">
             <div>
-              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 block mb-3">
+              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 block mb-3">
                 Factory Traction Grip Package
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -411,19 +411,19 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       })}
                       className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
                         isSelected
-                          ? 'bg-brand-surfaceAlt border-brand-cyan ring-1 ring-brand-cyan'
-                          : 'bg-brand-dark/60 border-brand-border hover:border-slate-500'
+                          ? 'bg-sky-50 border-sky-500 ring-1 ring-sky-500 shadow-sm'
+                          : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs font-bold text-white">{combo.name}</span>
+                        <span className="text-xs font-bold text-slate-900">{combo.name}</span>
                         {combo.tag && (
-                          <span className="text-[9px] font-mono font-bold bg-brand-cyan/20 text-brand-cyan px-1.5 py-0.5 rounded">
+                          <span className="text-[9px] font-mono font-bold bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded">
                             {combo.tag}
                           </span>
                         )}
                       </div>
-                      <span className="text-xs font-mono text-brand-cyan font-bold block mt-2">
+                      <span className="text-xs font-mono text-sky-700 font-bold block mt-2">
                         {combo.price === 0 ? '$0' : `+$${combo.price}`}
                       </span>
                     </div>
@@ -434,7 +434,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
 
             {config.tractionPadType !== 'Bare Wax Ready' && (
               <div>
-                <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 block mb-2">
+                <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 block mb-2">
                   Traction Pad Colorway
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -444,11 +444,11 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       onClick={() => onChange({ tractionColor: tc.hex })}
                       className={`px-3 py-1.5 rounded-lg border text-xs font-mono flex items-center gap-2 ${
                         config.tractionColor === tc.hex
-                          ? 'bg-brand-surfaceAlt border-brand-cyan text-white'
-                          : 'bg-brand-dark border-brand-border text-slate-400'
+                          ? 'bg-sky-50 border-sky-500 text-slate-900 font-semibold'
+                          : 'bg-slate-50 border-slate-200 text-slate-600'
                       }`}
                     >
-                      <span className="w-3 h-3 rounded-full border border-white/20" style={{ backgroundColor: tc.hex }} />
+                      <span className="w-3 h-3 rounded-full border border-slate-300 shadow-sm" style={{ backgroundColor: tc.hex }} />
                       <span>{tc.name}</span>
                     </button>
                   ))}
@@ -457,8 +457,8 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
             )}
 
             {/* Custom Rider Name Stamp */}
-            <div className="p-4 bg-brand-dark/70 rounded-2xl border border-brand-border space-y-2">
-              <label className="text-xs font-mono uppercase text-slate-300 font-bold block">
+            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+              <label className="text-xs font-mono uppercase text-slate-700 font-bold block">
                 Custom Rider Name / Deck Inscription (Free)
               </label>
               <input
@@ -467,10 +467,10 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                 placeholder="e.g. SAINT JOE #042 // SHREDDER"
                 value={config.riderNameStamp}
                 onChange={(e) => onChange({ riderNameStamp: e.target.value })}
-                className="w-full px-3.5 py-2.5 bg-brand-surface border border-brand-border rounded-xl text-sm font-mono text-white placeholder-slate-500 focus:outline-none focus:border-brand-cyan"
+                className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-mono text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
               />
-              <span className="text-[10px] text-slate-400 font-mono block">
-                Laser-etched underneath the top resin gloss coat in California.
+              <span className="text-[10px] text-slate-500 font-mono block">
+                Laser-etched underneath the top resin gloss coat in Tacloban City, Philippines, 6500.
               </span>
             </div>
           </div>
@@ -479,31 +479,31 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         {/* TAB 6: SUMMARY & SPEC CONFIRMATION */}
         {activeTab === 'summary' && (
           <div className="space-y-4 animate-fade-in">
-            <div className="p-4 bg-brand-dark/90 rounded-2xl border border-brand-border space-y-3 font-mono text-xs">
-              <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400 uppercase">Board Outline</span>
-                <span className="text-white font-bold">{config.shapeName}</span>
+            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 font-mono text-xs">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 uppercase">Board Outline</span>
+                <span className="text-slate-900 font-bold">{config.shapeName}</span>
               </div>
-              <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400 uppercase">Core & Layup</span>
-                <span className="text-brand-cyan font-bold">{config.coreMaterial}</span>
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 uppercase">Core & Layup</span>
+                <span className="text-sky-700 font-bold">{config.coreMaterial}</span>
               </div>
-              <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400 uppercase">Rocker & Foil</span>
-                <span className="text-white font-bold">{config.rocker} ({config.thickness})</span>
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 uppercase">Rocker & Foil</span>
+                <span className="text-slate-900 font-bold">{config.rocker} ({config.thickness})</span>
               </div>
-              <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400 uppercase">Resin Style</span>
-                <span className="text-white font-bold">{config.deckStyle}</span>
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 uppercase">Resin Style</span>
+                <span className="text-slate-900 font-bold">{config.deckStyle}</span>
               </div>
-              <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400 uppercase">Traction Grip</span>
-                <span className="text-white font-bold">{config.tractionPadType}</span>
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 uppercase">Traction Grip</span>
+                <span className="text-slate-900 font-bold">{config.tractionPadType}</span>
               </div>
               {config.riderNameStamp && (
-                <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                  <span className="text-slate-400 uppercase">Rider Inscription</span>
-                  <span className="text-brand-volt font-bold">{config.riderNameStamp}</span>
+                <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                  <span className="text-slate-500 uppercase">Rider Inscription</span>
+                  <span className="text-slate-900 font-bold">{config.riderNameStamp}</span>
                 </div>
               )}
             </div>
@@ -512,23 +512,23 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
             <div
               onClick={() => onChange({ rushBuild: !config.rushBuild })}
               className={`p-3.5 rounded-xl border cursor-pointer flex items-center justify-between ${
-                config.rushBuild ? 'bg-brand-surfaceAlt border-brand-volt' : 'bg-brand-dark/50 border-brand-border'
+                config.rushBuild ? 'bg-amber-50 border-amber-500 text-amber-950' : 'bg-slate-50 border-slate-200'
               }`}
             >
               <div className="flex items-center gap-2.5">
-                <Clock className="w-4 h-4 text-brand-volt" />
+                <Clock className="w-4 h-4 text-amber-600" />
                 <div>
-                  <p className="text-xs font-bold text-white">Priority Express Shaping (+ $50)</p>
-                  <p className="text-[10px] text-slate-400 font-mono">Dispatches in 5 business days instead of 14</p>
+                  <p className="text-xs font-bold text-slate-900">Priority Express Shaping (+ $50)</p>
+                  <p className="text-[10px] text-slate-500 font-mono">Dispatches in 5 business days instead of 14</p>
                 </div>
               </div>
-              <div className={`w-5 h-5 rounded-md flex items-center justify-center border ${config.rushBuild ? 'bg-brand-volt text-brand-dark border-brand-volt' : 'border-slate-600'}`}>
+              <div className={`w-5 h-5 rounded-md flex items-center justify-center border ${config.rushBuild ? 'bg-amber-500 text-white border-amber-500' : 'border-slate-300 bg-white'}`}>
                 {config.rushBuild && <Check className="w-3.5 h-3.5 stroke-[3]" />}
               </div>
             </div>
 
-            <div className="p-3 bg-brand-cyan/10 border border-brand-cyan/30 rounded-xl text-[11px] text-slate-300 flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-brand-cyan flex-shrink-0" />
+            <div className="p-3 bg-sky-50 border border-sky-200 rounded-xl text-[11px] text-sky-900 flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-sky-600 flex-shrink-0" />
               <span>Includes Lifetime Delamination Warranty & Saint Joe Factory Authenticity Certificate.</span>
             </div>
           </div>
@@ -537,7 +537,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
       </div>
 
       {/* Footer Navigation & Add to Cart */}
-      <div className="pt-6 border-t border-brand-border/80 flex items-center justify-between gap-4 mt-6">
+      <div className="pt-6 border-t border-slate-200 flex items-center justify-between gap-4 mt-6">
         
         {/* Prev / Next Step Buttons */}
         <div className="flex items-center gap-2">
@@ -547,7 +547,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                 const idx = tabs.findIndex(t => t.id === activeTab);
                 if (idx > 0) setActiveTab(tabs[idx - 1].id as any);
               }}
-              className="px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-xs font-mono text-slate-400 hover:text-white"
+              className="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-mono text-slate-600 hover:text-slate-900 hover:bg-slate-100"
             >
               ← Back
             </button>
@@ -559,10 +559,10 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                 const idx = tabs.findIndex(t => t.id === activeTab);
                 if (idx < tabs.length - 1) setActiveTab(tabs[idx + 1].id as any);
               }}
-              className="px-4 py-2.5 rounded-xl bg-brand-surfaceAlt hover:bg-brand-border text-white text-xs font-mono font-bold flex items-center gap-1.5"
+              className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-mono font-bold flex items-center gap-1.5 border border-slate-200"
             >
               <span>Next Step</span>
-              <ChevronRight className="w-4 h-4 text-brand-cyan" />
+              <ChevronRight className="w-4 h-4 text-sky-600" />
             </button>
           ) : null}
         </div>
@@ -570,7 +570,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         {/* Master CTA: Add Custom Board to Quiver */}
         <button
           onClick={onAddToCart}
-          className="flex-1 max-w-xs inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-cyan text-brand-dark font-display font-black text-sm uppercase tracking-wider hover:brightness-110 transition-all shadow-xl hover:shadow-cyan-500/30"
+          className="flex-1 max-w-xs inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-display font-black text-sm uppercase tracking-wider transition-all shadow-md"
         >
           <ShoppingBag className="w-4 h-4 stroke-[2.5]" />
           <span>Add Custom to Quiver (${calculatedPrice})</span>
