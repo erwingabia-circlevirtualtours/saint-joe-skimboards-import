@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BoardProduct } from '../../types';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
-import { Star, ShoppingBag, Heart, Eye, ArrowRight, ShieldCheck, Zap } from 'lucide-react';
+import { Star, ShoppingBag, Heart, Eye, ArrowRight, ShieldCheck, Zap, Gift } from 'lucide-react';
 
 interface ProductCardProps {
   product: BoardProduct;
@@ -29,7 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       isCustom: false,
       name: product.name,
       price: product.price,
-      image: '/saint-joe-logo.jpg',
+      image: product.image || '/saintjoeskim_logo_black.png',
       selectedSize: selectedSize,
       selectedColor: activeColorway.name,
       quantity: 1,
@@ -79,29 +79,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         />
 
         {/* Board Shape Representation */}
-        <div
-          className="relative w-28 sm:w-32 h-60 sm:h-64 rounded-[42px] border-2 border-slate-300 shadow-xl flex flex-col items-center justify-between p-3.5 transition-all duration-500 transform group-hover:scale-105 group-hover:rotate-1"
-          style={{
-            background: `linear-gradient(180deg, ${activeColorway.hex} 0%, ${activeColorway.accentHex} 100%)`,
-          }}
-        >
-          {/* Carbon Weave Texture overlay */}
-          <div className="absolute inset-0 rounded-[40px] opacity-30 carbon-bg" />
-
-          {/* Grip Pad Simulation */}
-          <div className="relative z-10 w-16 h-12 rounded-lg bg-black/70 border border-white/20 flex items-center justify-center shadow-inner">
-            <span className="text-[8px] font-mono text-white font-bold">GRIP</span>
-          </div>
-
-          {/* Saint Joe Deck Stamp */}
-          <div className="relative z-10 w-10 h-10 rounded-full bg-white p-0.5 shadow-md border border-black/20 flex items-center justify-center overflow-hidden">
-            <img src="/saint-joe-logo.jpg" alt="Saint Joe" className="w-full h-full object-cover" />
-          </div>
-
-          {/* Kick Tail Pad Simulation */}
-          <div className="relative z-10 w-20 h-14 rounded-b-[32px] bg-black/80 border-t border-sky-400/80 flex items-center justify-center shadow-inner">
-            <span className="text-[8px] font-mono text-sky-300 font-bold">TAIL KICK</span>
-          </div>
+        <div className="relative z-10 w-28 sm:w-32 h-60 sm:h-64 flex items-center justify-center p-2 transition-all duration-500 transform group-hover:scale-105 group-hover:rotate-1">
+          <img
+            src={product.image && product.image.startsWith('/') ? product.image : '/saint_joe_foamy.png'}
+            alt={product.name}
+            referrerPolicy="no-referrer"
+            className="max-h-full max-w-full object-contain filter drop-shadow-xl"
+          />
         </div>
 
         {/* Quick View Floating Action */}
@@ -159,6 +143,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
+        {/* Free Inclusions Banner if provided */}
+        {product.freeInclusions && (
+          <div className="bg-sky-50 border border-sky-200 rounded-xl px-2.5 py-1.5 flex items-center gap-1.5 text-[11px] font-mono text-sky-800 font-bold">
+            <Gift className="w-3.5 h-3.5 text-sky-600 shrink-0" />
+            <span className="line-clamp-1">{product.freeInclusions}</span>
+          </div>
+        )}
+
         {/* Rating & In-Stock Count */}
         <div className="flex items-center justify-between text-xs font-mono text-slate-500 pt-1 border-t border-slate-100">
           <div className="flex items-center gap-1 text-amber-500">
@@ -176,7 +168,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Price & Action Button */}
         <div className="pt-2 flex items-center justify-between gap-3">
           <div>
-            <span className="text-[10px] font-mono text-slate-400 block uppercase">Price</span>
+            <div className="flex items-center gap-1">
+              <span className="text-[10px] font-mono text-slate-400 block uppercase">Price</span>
+              {product.localPricePhp && (
+                <span className="text-[9px] font-mono bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.2 rounded uppercase">
+                  PH Local
+                </span>
+              )}
+            </div>
             <div className="flex items-baseline gap-1.5">
               <span className="font-display font-black text-xl text-slate-900">
                 ${product.price}
@@ -187,6 +186,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </span>
               )}
             </div>
+            {product.localPricePhp && (
+              <span className="text-[11px] font-mono text-emerald-700 font-bold block -mt-0.5">
+                ≈ {product.localPricePhp}
+              </span>
+            )}
           </div>
 
           <button

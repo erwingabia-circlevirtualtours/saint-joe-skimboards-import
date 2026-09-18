@@ -63,7 +63,9 @@ export const CheckoutModal: React.FC = () => {
 
         {/* Modal Header */}
         <div className="p-6 border-b border-slate-200 bg-slate-50 flex items-center gap-3">
-          <img src="/saint-joe-logo.jpg" alt="Logo" className="w-10 h-10 rounded-xl object-cover border border-slate-200 p-0.5" />
+          <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 p-1 flex items-center justify-center flex-shrink-0">
+            <img src="/saintjoeskim_logo_black.png" alt="Logo" className="w-full h-full object-contain" />
+          </div>
           <div>
             <h3 className="font-display font-black text-xl text-slate-900 uppercase">
               {step === 'success' ? 'Order Confirmed' : 'Saint Joe Express Checkout'}

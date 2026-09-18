@@ -27,17 +27,18 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
   }, [selectedCategory]);
 
   const tabs = [
-    { id: 'all', label: 'All Quiver' },
-    { id: 'pro', label: 'Pro Carbon Series' },
-    { id: 'hybrid', label: 'Hybrid Shapes' },
-    { id: 'carbon', label: 'Full 3K Carbon' },
-    { id: 'grom', label: 'Grom & Junior' },
+    { id: 'all', label: 'All Collections' },
+    { id: 'woody', label: 'Woody' },
+    { id: 'foamy', label: 'Foamy' },
+    { id: 'carbon', label: 'Carbon Fiber' },
   ];
 
   const filteredProducts = useMemo(() => {
     let list = PRODUCTS.filter(p => {
-      if (activeTab !== 'all' && p.category !== activeTab) {
-        return false;
+      if (activeTab !== 'all') {
+        if (p.category !== activeTab) {
+          return false;
+        }
       }
       if (inStockOnly && !p.inStock) {
         return false;

@@ -5,79 +5,105 @@ export interface ShapeOption {
   description: string;
   recommendedFor: string;
   basePrice: number;
-  outlineType: 'pro-pin' | 'hybrid-squash' | 'dude-fish' | 'diamond-speed';
+  outlineType: 'pro-shape' | 'fishtail';
+  image?: string;
 }
 
 export const SHAPES: ShapeOption[] = [
   {
     id: 'pro-shape',
-    name: 'Saint Pro Shape (Pin Tail)',
-    badge: 'WORLD CHAMPION',
-    description: 'Narrower nose, continuous rail curve, and pin tail for unmatched rail bite and speed in heavy shorebreak.',
+    name: 'Saint Joe Pro Shape',
+    badge: 'PRO SHAPE',
+    description: 'Elongated tapered nose, forward wide point (+2.5" forward), and responsive pro shape rails for unmatched rail bite, wrapping power, and high-speed hold in heavy shorebreak.',
     recommendedFor: 'Advanced shorebreak riding, wrapping waves & technical tricks',
     basePrice: 599,
-    outlineType: 'pro-pin',
+    outlineType: 'pro-shape',
+    image: '/saint_joe_foamy.png',
   },
   {
-    id: 'hybrid-shape',
-    name: 'Saint Hybrid (Squash Tail)',
-    badge: 'MOST VERSATILE',
-    description: 'Wider nose for early planing speed combined with a responsive squash tail that holds lines through choppy sandbars.',
-    recommendedFor: 'All-around shorebreak, side-slipping & long distance reach',
-    basePrice: 579,
-    outlineType: 'hybrid-squash',
-  },
-  {
-    id: 'dude-cruise',
-    name: 'Dude! Cruise (Fish / Swallow Tail)',
-    badge: 'MAX FLOAT',
-    description: 'Extra width across the chest with twin fish swallow tails for skatey, fast cruising and summer mush fun.',
-    recommendedFor: 'Flatter beaches, smaller waves & effortless distance',
-    basePrice: 549,
-    outlineType: 'dude-fish',
-  },
-  {
-    id: 'hornet-diamond',
-    name: 'Hornet Diamond (Diamond Tail)',
-    badge: 'AERIAL POP',
-    description: 'Parallel center rails for pure down-the-line sprint speed with diamond release points for explosive pop off the lip.',
-    recommendedFor: 'Speed runs, big air boosts & rapid rail-to-rail transitions',
-    basePrice: 619,
-    outlineType: 'diamond-speed',
+    id: 'fishtail',
+    name: 'Saint Joe Fishtail',
+    badge: 'NEW WORKSHOP SHAPE',
+    description: 'Authentic Saint Joe Fishtail shape with twin fish tail points and hydrodynamic center V-notch. Wide forward chest outline for maximum planing lift and skatey, rapid-fire rail transitions.',
+    recommendedFor: 'Maximum planing speed, flatter sandbars & rapid wave wrapping',
+    basePrice: 569,
+    outlineType: 'fishtail',
+    image: '/saint_joe_fishtail.png',
   }
 ];
 
 export const CORE_LAYUPS = [
   {
     id: 'double-carbon',
-    name: 'Double Carbon 3K + Epoxy',
-    subtitle: 'Full Carbon Fiber Top & Bottom Layup',
+    name: 'Carbon Fiber (Double Carbon 3K)',
+    subtitle: 'Dual-Layer Aerospace Carbon Top & Bottom',
     price: 90,
     tag: 'PRO STIFFNESS',
     colorPreview: '#12141a',
     features: ['Max rigidity & instantaneous spring recoil', 'Toray 3K aerospace carbon weave', 'Sub-4.2 lbs total board weight']
   },
   {
+    id: 'foamy-core',
+    name: 'Foamy Core (High-Density PVC + E-Glass)',
+    subtitle: 'Closed-Cell Foam Core with Double 6oz E-Glass',
+    price: 0,
+    tag: 'MAX BUOYANCY',
+    colorPreview: '#c026d3',
+    features: ['Exceptional float & early planing lift', 'Forgiving rail carves on mushy waves', 'Vibrant resin color saturation']
+  },
+  {
+    id: 'woody-marine',
+    name: 'Woody Core (Marine Hardwood + Glass)',
+    subtitle: 'Multi-Ply Philippine Hardwood Composite',
+    price: -40,
+    tag: 'LOCAL FAVORITE',
+    colorPreview: '#0284c7',
+    features: ['Natural wood inertia & momentum', 'Extra scratch & sand impact resistance', 'Includes free arch bar & traction pad']
+  },
+  {
     id: 'kevlar-weave',
-    name: 'Kevlar Pro Carbon Hybrid',
+    name: 'Kevlar Carbon Pro Hybrid',
     subtitle: 'Interwoven Kevlar & Carbon with Epoxy',
     price: 75,
     tag: 'EXTREME IMPACT',
     colorPreview: '#252932',
     features: ['Bulletproof puncture resistance on rocky sand', 'Damped chatter through chop', 'Ultra high durability']
-  },
-  {
-    id: 'aerospace-s-glass',
-    name: 'Aerospace S-Glass Epoxy',
-    subtitle: 'High-Tensile S-Glass Shell with PVC Core',
-    price: 0,
-    tag: 'CLASSIC SNAP',
-    colorPreview: '#384252',
-    features: ['Smooth lively flex pattern for carving', 'Tested high-impact durability', 'Proven performance since 2002']
   }
 ];
 
 export const RESIN_TINTS = [
+  {
+    id: 'foamy-turquoise-blue',
+    name: 'Foamy Turquoise Blue Pro (Signature)',
+    deckColor: '#0891b2',
+    deckAccentColor: '#06b6d4',
+    bottomColor: '#0e7490',
+    type: 'Solid Color' as const,
+  },
+  {
+    id: 'foamy-magenta-white',
+    name: 'Foamy Magenta Purple & White Rails (Workshop Original)',
+    deckColor: '#c026d3',
+    deckAccentColor: '#ffffff',
+    bottomColor: '#c026d3',
+    type: 'Solid Color' as const,
+  },
+  {
+    id: 'foamy-orange-white',
+    name: 'Foamy Sunburst Orange & White Rails (Workshop Original)',
+    deckColor: '#ea580c',
+    deckAccentColor: '#ffffff',
+    bottomColor: '#ea580c',
+    type: 'Solid Color' as const,
+  },
+  {
+    id: 'saint-pro-dahican-anime',
+    name: 'Dahican Sky & Deep Ocean (Anime Edition)',
+    deckColor: '#38bdf8',
+    deckAccentColor: '#0284c7',
+    bottomColor: '#075985',
+    type: 'Laguna Resin Swirl' as const,
+  },
   {
     id: 'stealth-black',
     name: 'Stealth Carbon Black',

@@ -38,7 +38,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         (p.signatureRider && p.signatureRider.toLowerCase().includes(query.toLowerCase()))
       );
 
-  const popularSearches = ['Double Carbon', 'Hybrid Squash', 'Grom Series', 'Pin Tail', '5/8 Thin Rail'];
+  const popularSearches = ['Foamy', 'Woody', 'Carbon Fiber', 'Double Carbon', 'Fishtail', 'Pro Shape'];
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-900/50 backdrop-blur-md animate-fade-in">

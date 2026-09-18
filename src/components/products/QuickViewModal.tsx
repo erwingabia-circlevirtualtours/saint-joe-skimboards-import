@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BoardProduct } from '../../types';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
-import { X, Star, ShoppingBag, Heart, ShieldCheck, Zap, Layers, Check, Truck, ArrowRight } from 'lucide-react';
+import { X, Star, ShoppingBag, Heart, ShieldCheck, Zap, Layers, Check, Truck, ArrowRight, Gift } from 'lucide-react';
 
 interface QuickViewModalProps {
   product: BoardProduct | null;
@@ -31,7 +31,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
       isCustom: false,
       name: product.name,
       price: product.price,
-      image: '/saint-joe-logo.jpg',
+      image: product.image || '/saintjoeskim_logo_black.png',
       selectedSize: selectedSize,
       selectedColor: activeColorway.name,
       quantity: quantity,
@@ -63,29 +63,14 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
               style={{ backgroundColor: activeColorway.accentHex }}
             />
 
-            {/* Board Simulation */}
-            <div
-              className="relative w-36 sm:w-44 h-72 sm:h-80 rounded-[48px] border-2 border-slate-300 shadow-xl flex flex-col items-center justify-between p-4 my-4"
-              style={{
-                background: `linear-gradient(180deg, ${activeColorway.hex} 0%, ${activeColorway.accentHex} 100%)`
-              }}
-            >
-              <div className="absolute inset-0 rounded-[46px] opacity-30 carbon-bg" />
-              
-              {/* Traction Grip */}
-              <div className="relative z-10 w-24 h-16 rounded-xl bg-black/70 border border-white/20 flex items-center justify-center shadow-inner">
-                <span className="text-[9px] font-mono text-white font-bold">PRO ARCH</span>
-              </div>
-
-              {/* Deck Stamp */}
-              <div className="relative z-10 w-14 h-14 rounded-full bg-white p-1 shadow-lg border border-black/20 flex items-center justify-center overflow-hidden">
-                <img src="/saint-joe-logo.jpg" alt="Saint Joe" className="w-full h-full object-cover" />
-              </div>
-
-              {/* Tail Pad */}
-              <div className="relative z-10 w-28 h-18 rounded-b-[38px] bg-black/80 border-t border-sky-400 flex items-center justify-center shadow-inner">
-                <span className="text-[9px] font-mono text-sky-300 font-bold">KICK TAIL</span>
-              </div>
+            {/* Authentic Board Photography */}
+            <div className="relative z-10 w-40 sm:w-48 h-72 sm:h-80 flex items-center justify-center p-2 my-4">
+              <img
+                src={product.image && product.image.startsWith('/') ? product.image : '/saint_joe_foamy.png'}
+                alt={product.name}
+                referrerPolicy="no-referrer"
+                className="max-h-full max-w-full object-contain filter drop-shadow-2xl"
+              />
             </div>
 
             <div className="w-full pt-4 border-t border-slate-200 flex items-center justify-between text-xs font-mono text-slate-500">
@@ -120,11 +105,18 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
 
               {/* Price & Rating */}
               <div className="flex items-center justify-between pt-3">
-                <div className="flex items-baseline gap-2">
-                  <span className="font-display font-black text-3xl text-slate-900">${product.price}</span>
-                  {product.originalPrice && (
-                    <span className="text-sm font-mono text-slate-400 line-through">${product.originalPrice}</span>
-                  )}
+                <div>
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-display font-black text-3xl text-slate-900">${product.price}</span>
+                    {product.originalPrice && (
+                      <span className="text-sm font-mono text-slate-400 line-through">${product.originalPrice}</span>
+                    )}
+                    {product.localPricePhp && (
+                      <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
+                        {product.localPricePhp} (Philippine Local Price)
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-1.5 text-amber-500 text-xs font-mono">
@@ -133,6 +125,21 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                   <span className="text-slate-400">({product.reviewCount} verified reviews)</span>
                 </div>
               </div>
+
+              {/* Free inclusions banner */}
+              {product.freeInclusions && (
+                <div className="mt-3 bg-gradient-to-r from-sky-50 to-emerald-50 border border-sky-200 rounded-xl p-3 flex items-center gap-2.5 text-xs font-mono text-slate-800">
+                  <div className="p-1.5 bg-sky-500 text-white rounded-lg shrink-0">
+                    <Gift className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="font-bold text-sky-900 block uppercase tracking-wider text-[11px]">
+                      Special Local Inclusion Bundle
+                    </span>
+                    <span className="text-slate-700">{product.freeInclusions} ($45 USD Value)</span>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Description */}

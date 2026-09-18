@@ -11,8 +11,8 @@ export const CustomBuilder: React.FC = () => {
 
   const defaultConfig: CustomBoardConfig = {
     shapeId: 'pro-shape',
-    shapeName: 'Saint Pro Shape (Pin Tail)',
-    tailShape: 'Pin Tail',
+    shapeName: 'Saint Joe Pro Shape',
+    tailShape: 'Pro Shape',
     size: 'Medium (51.5")',
     thickness: '5/8"',
     coreMaterial: 'Double Carbon Epoxy',
@@ -24,10 +24,10 @@ export const CustomBuilder: React.FC = () => {
     carbonRails: true,
     carbonStringer: true,
     rocker: 'Standard Ocean Rocker',
-    tractionPadType: 'Full Deck Combo',
+    tractionPadType: 'Bare Wax Ready',
     tractionColor: '#11141b',
-    riderNameStamp: 'SAINT JOE #001',
-    includeSaintJoeLogo: true,
+    riderNameStamp: '',
+    includeSaintJoeLogo: false,
     rushBuild: false,
     notes: '',
   };
@@ -88,9 +88,11 @@ export const CustomBuilder: React.FC = () => {
     addToCart({
       id: `custom-${Date.now()}`,
       isCustom: true,
-      name: `Custom ${config.shapeName} (${config.size.split(' ')[0]})`,
+      name: config.customLength && config.customWidth
+        ? `Custom ${config.shapeName} (${config.size.split(' ')[0]} • ${config.customLength}"×${config.customWidth}")`
+        : `Custom ${config.shapeName} (${config.size.split(' ')[0]})`,
       price: calculatedPrice,
-      image: '/saint-joe-logo.jpg',
+      image: '/saint_apex_pro_carbon.png',
       selectedSize: config.size,
       selectedColor: config.deckStyle,
       customConfig: config,

@@ -30,11 +30,13 @@ export const Footer: React.FC = () => {
           
           <div className="lg:col-span-6 space-y-4">
             <div className="flex items-center gap-3">
-              <img
-                src="/saint-joe-logo.jpg"
-                alt="Saint Joe Skimboards"
-                className="w-12 h-12 rounded-xl object-cover bg-white p-0.5 border border-slate-200 shadow-sm"
-              />
+              <div className="w-12 h-12 rounded-xl bg-white p-1 border border-slate-200 shadow-sm flex items-center justify-center flex-shrink-0">
+                <img
+                  src="/saintjoeskim_logo_black.png"
+                  alt="Saint Joe Skimboards"
+                  className="w-full h-full object-contain"
+                />
+              </div>
               <div>
                 <span className="font-display font-black text-2xl tracking-tight text-slate-900 uppercase flex items-center gap-1.5">
                   SAINT JOE <span className="text-sky-600">SKiMBOARDS</span>

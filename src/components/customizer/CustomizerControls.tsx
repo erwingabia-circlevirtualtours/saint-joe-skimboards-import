@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { CustomBoardConfig } from '../../types';
 import {
   SHAPES,
@@ -20,7 +20,12 @@ import {
   Flame,
   ChevronRight,
   Info,
-  Clock
+  Clock,
+  Ruler,
+  Scale,
+  Calculator,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 
 interface CustomizerControlsProps {
@@ -37,6 +42,50 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
   calculatedPrice,
 }) => {
   const [activeTab, setActiveTab] = useState<'shape' | 'layup' | 'art' | 'rocker' | 'traction' | 'summary'>('shape');
+
+  // Interactive sizing helper state
+  const [showSizeHelper, setShowSizeHelper] = useState<boolean>(false);
+  const [helperHeight, setHelperHeight] = useState<number>(70); // 5'10"
+  const [helperWeight, setHelperWeight] = useState<number>(75); // 75 kg (~165 lbs)
+
+  // Listen for cross-component sizing dispatch from SizingCalculator
+  useEffect(() => {
+    const handleSetSize = (e: any) => {
+      if (e.detail?.sizeName) {
+        const matchingSize = SIZES.find((s) =>
+          s.name.toLowerCase().includes(e.detail.sizeName.toLowerCase().split(' ')[0])
+        );
+        if (matchingSize) {
+          onChange({
+            size: matchingSize.name as any,
+            customLength: e.detail.computedLength,
+            customWidth: e.detail.computedWidth,
+          });
+          setActiveTab('shape');
+        }
+      }
+    };
+    window.addEventListener('saintjoe-set-custom-size', handleSetSize);
+    return () => window.removeEventListener('saintjoe-set-custom-size', handleSetSize);
+  }, [onChange]);
+
+  // Compute exact shaper dimensions:
+  // 1. Skimboard length = 75% rider height rounded to next whole number in inches
+  const computedHelperLength = Math.ceil(helperHeight * 0.75);
+
+  // 2. Skimboard Width = 19-22 inches, 40kgs below 19inches. 0.5 inch increment per 10kg body weight.
+  const computedHelperWidth = useMemo(() => {
+    if (helperWeight <= 40) return 19.0;
+    const increment = ((helperWeight - 40) / 10) * 0.5;
+    return Math.min(22.0, +(19.0 + increment).toFixed(1));
+  }, [helperWeight]);
+
+  const matchedSizeObj = useMemo(() => {
+    if (computedHelperLength <= 49 || helperWeight < 60) return SIZES[0]; // Small
+    if (computedHelperLength <= 52 || helperWeight < 78) return SIZES[1]; // Medium
+    if (computedHelperLength <= 54 || helperWeight < 92) return SIZES[2]; // Large
+    return SIZES[3]; // X-Large
+  }, [computedHelperLength, helperWeight]);
 
   const tabs = [
     { id: 'shape', label: '1. Shape & Size' },
@@ -90,7 +139,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       onClick={() => onChange({
                         shapeId: shape.id,
                         shapeName: shape.name,
-                        tailShape: (shape.id === 'pro-shape' ? 'Pin Tail' : shape.id === 'hybrid-shape' ? 'Squash Tail' : shape.id === 'dude-cruise' ? 'Fish Tail' : 'Diamond Tail')
+                        tailShape: shape.id === 'pro-shape' ? 'Pro Shape' : 'Fishtail'
                       })}
                       className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                         isSelected
@@ -98,15 +147,29 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                           : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                       }`}
                     >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-bold text-slate-900">{shape.name}</span>
-                        {shape.badge && (
-                          <span className="text-[9px] font-mono font-bold bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded">
-                            {shape.badge}
-                          </span>
+                      <div className="flex items-start justify-between gap-3 mb-1">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-bold text-slate-900">{shape.name}</span>
+                            {shape.badge && (
+                              <span className="text-[9px] font-mono font-bold bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded whitespace-nowrap">
+                                {shape.badge}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs text-slate-600 line-clamp-2 mt-1">{shape.description}</p>
+                        </div>
+                        {shape.image && (
+                          <div className="w-11 h-18 flex-shrink-0 bg-white rounded-xl p-1 border border-slate-200 shadow-sm flex items-center justify-center overflow-hidden">
+                            <img
+                              src={shape.image}
+                              alt={shape.name}
+                              referrerPolicy="no-referrer"
+                              className="max-h-full max-w-full object-contain"
+                            />
+                          </div>
                         )}
                       </div>
-                      <p className="text-xs text-slate-600 line-clamp-2 mt-1">{shape.description}</p>
                       <div className="mt-3 pt-2 border-t border-slate-200 flex items-center justify-between text-xs font-mono">
                         <span className="text-slate-500">Base Price:</span>
                         <span className="text-slate-900 font-bold">${shape.basePrice}</span>
@@ -119,10 +182,23 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
 
             {/* Sizing selection */}
             <div>
-              <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 block mb-3">
-                Board Size & Rider Target Weight
-              </label>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <div className="flex items-center justify-between mb-3">
+                <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700">
+                  Board Size & Rider Target Weight
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setShowSizeHelper(!showSizeHelper)}
+                  className="text-xs font-mono font-bold text-sky-700 hover:text-sky-800 flex items-center gap-1 bg-sky-50 px-2.5 py-1 rounded-lg border border-sky-200"
+                >
+                  <Calculator className="w-3.5 h-3.5" />
+                  <span>{showSizeHelper ? 'Close Calculator' : 'How We Size (Formula)'}</span>
+                  {showSizeHelper ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                </button>
+              </div>
+
+              {/* Standard Sizes Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-3">
                 {SIZES.map((size) => {
                   const isSelected = config.size.startsWith(size.name.split(' ')[0]);
                   return (
@@ -135,13 +211,123 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                           : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900'
                       }`}
                     >
-                      <span className="text-xs font-bold block text-slate-900">{size.name}</span>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold block text-slate-900">{size.name}</span>
+                        {isSelected && config.customLength && config.customWidth && (
+                          <span className="text-[8px] font-mono bg-sky-200 text-sky-900 px-1 py-0.2 rounded font-bold">
+                            TAILORED
+                          </span>
+                        )}
+                      </div>
                       <span className="text-[10px] font-mono text-slate-500 block mt-0.5">{size.dimensions}</span>
                       <span className="text-[9px] font-mono text-sky-700 block mt-1">{size.riderWeight}</span>
                     </button>
                   );
                 })}
               </div>
+
+              {/* Interactive Sizing Formula Explainer & Dimension Calculator */}
+              {showSizeHelper ? (
+                <div className="p-4 bg-sky-50/70 border border-sky-200 rounded-2xl space-y-4 animate-fade-in text-xs font-mono">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <span className="text-[10px] font-mono font-bold uppercase text-sky-800 bg-sky-100 px-2 py-0.5 rounded">
+                        SAINT JOE SIZING FORMULA
+                      </span>
+                      <h4 className="font-bold text-slate-900 text-sm mt-1">
+                        75% Height & Weight-Scaled Width
+                      </h4>
+                    </div>
+                    <span className="text-[10px] text-slate-500">Hydrodynamic Planing</span>
+                  </div>
+
+                  {/* Formula description copy */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-700 bg-white p-3 rounded-xl border border-slate-200 text-[11px] leading-relaxed">
+                    <div>
+                      <span className="font-bold text-sky-700 block">1. Length = 75% Rider Height</span>
+                      <span>Rounded up to next whole inch. Reaches sternum-to-collarbone for zero knee-clip on drops and balanced stance leverage.</span>
+                    </div>
+                    <div>
+                      <span className="font-bold text-sky-700 block">2. Width = 19&quot; to 22&quot;</span>
+                      <span>19.0&quot; base (≤40kg) + 0.5&quot; per 10kg body weight. Provides exact planing lift to prevent sinking in wave wraps.</span>
+                    </div>
+                  </div>
+
+                  {/* Quick Calculator Sliders */}
+                  <div className="space-y-3 pt-1">
+                    <div>
+                      <div className="flex justify-between items-center text-xs text-slate-800 font-bold mb-1">
+                        <span>Your Height: {Math.floor(helperHeight / 12)}&apos;{helperHeight % 12}&quot; ({helperHeight}&quot;)</span>
+                        <span className="text-sky-700">Target Length: {computedHelperLength}&quot;</span>
+                      </div>
+                      <input
+                        type="range"
+                        min={54}
+                        max={76}
+                        value={helperHeight}
+                        onChange={(e) => setHelperHeight(Number(e.target.value))}
+                        className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
+                      />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between items-center text-xs text-slate-800 font-bold mb-1">
+                        <span>Your Weight: {helperWeight} kg ({Math.round(helperWeight * 2.20462)} lbs)</span>
+                        <span className="text-sky-700">Target Width: {computedHelperWidth}&quot;</span>
+                      </div>
+                      <input
+                        type="range"
+                        min={35}
+                        max={105}
+                        value={helperWeight}
+                        onChange={(e) => setHelperWeight(Number(e.target.value))}
+                        className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Computed Outcome & Apply Button */}
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-sky-200">
+                    <div className="text-slate-900">
+                      <span className="text-slate-500 block text-[10px]">Calculated Tailored Spec:</span>
+                      <strong className="text-sm font-display text-sky-900">
+                        {computedHelperLength}&quot; Length × {computedHelperWidth}&quot; Width
+                      </strong>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onChange({
+                          size: matchedSizeObj.name as any,
+                          customLength: computedHelperLength,
+                          customWidth: computedHelperWidth,
+                        });
+                      }}
+                      className="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-sm"
+                    >
+                      <span>Apply Matched Tier: {matchedSizeObj.name}</span>
+                      <Check className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                /* Compact Helper Teaser Banner */
+                <div
+                  onClick={() => setShowSizeHelper(true)}
+                  className="p-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl cursor-pointer flex items-center justify-between text-xs font-mono text-slate-600 transition-colors"
+                >
+                  <div className="flex items-center gap-2">
+                    <Info className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
+                    <span>
+                      Formula: <strong>Length = 75% height</strong> | <strong>Width = 19&quot;–22&quot;</strong> (+0.5&quot;/10kg).
+                    </span>
+                  </div>
+                  <span className="text-sky-700 font-bold text-[11px] hover:underline flex-shrink-0 ml-2">
+                    Calculate →
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -315,7 +501,9 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
               }`}
             >
               <div className="flex items-center gap-3">
-                <img src="/saint-joe-logo.jpg" alt="Logo" className="w-8 h-8 rounded-lg object-cover border border-slate-200" />
+                <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 p-0.5 flex items-center justify-center">
+                  <img src="/saintjoeskim_logo_black.png" alt="Logo" className="w-full h-full object-contain" />
+                </div>
                 <div>
                   <p className="text-xs font-bold text-slate-900">Saint Joe Iconic Emblem Lamination</p>
                   <p className="text-[10px] text-slate-500 font-mono">Hand-placed fiberglass deck emblem</p>
@@ -483,6 +671,17 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
               <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                 <span className="text-slate-500 uppercase">Board Outline</span>
                 <span className="text-slate-900 font-bold">{config.shapeName}</span>
+              </div>
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 uppercase">Board Size</span>
+                <span className="text-slate-900 font-bold">
+                  {config.size}
+                  {config.customLength && config.customWidth && (
+                    <span className="text-sky-700 font-normal ml-1">
+                      (Tailored {config.customLength}&quot; × {config.customWidth}&quot;)
+                    </span>
+                  )}
+                </span>
               </div>
               <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                 <span className="text-slate-500 uppercase">Core & Layup</span>

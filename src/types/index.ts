@@ -1,4 +1,4 @@
-export type BoardCategory = 'all' | 'pro' | 'hybrid' | 'carbon' | 'grom' | 'accessories';
+export type BoardCategory = 'all' | 'woody' | 'foamy' | 'carbon';
 
 export type SkillLevel = 'Beginner' | 'Intermediate' | 'Advanced' | 'Pro Rider';
 
@@ -8,9 +8,11 @@ export interface BoardProduct {
   id: string;
   name: string;
   subtitle: string;
-  category: 'pro' | 'hybrid' | 'carbon' | 'grom';
+  category: 'woody' | 'foamy' | 'carbon';
   price: number;
   originalPrice?: number;
+  localPricePhp?: string;
+  freeInclusions?: string;
   rating: number;
   reviewCount: number;
   badge?: string;
@@ -43,7 +45,7 @@ export interface BoardProduct {
 export interface CustomBoardConfig {
   shapeId: string;
   shapeName: string;
-  tailShape: 'Pin Tail' | 'Squash Tail' | 'Fish Tail' | 'Diamond Tail';
+  tailShape: 'Pro Shape' | 'Fishtail';
   size: 'Small (48")' | 'Medium (51.5")' | 'Large (53")' | 'X-Large (55")' | 'Grom (44")';
   thickness: '5/8"' | '3/4"' | 'Tapered (3/4" to 5/8")';
   coreMaterial: 'Double Carbon Epoxy' | 'Kevlar Pro Weave' | 'Aerospace E-Glass' | 'Carbon Hybrid';
@@ -61,6 +63,8 @@ export interface CustomBoardConfig {
   includeSaintJoeLogo: boolean;
   rushBuild: boolean;
   notes: string;
+  customLength?: number;
+  customWidth?: number;
 }
 
 export interface CartItem {

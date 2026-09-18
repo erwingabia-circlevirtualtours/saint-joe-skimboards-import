@@ -91,14 +91,36 @@ export const TeamShowcase: React.FC = () => {
               </div>
 
               {/* Recommended Board Link */}
-              <div className="p-4 bg-white rounded-2xl border border-slate-200 flex items-center justify-between shadow-sm">
-                <div>
-                  <span className="text-[10px] font-mono uppercase text-slate-500 block">RECOMMENDED WEAPON OF CHOICE</span>
-                  <p className="font-display font-black text-base text-slate-900">{selectedSpot.recommendedBoardName}</p>
+              <div className="p-4 bg-white rounded-2xl border border-slate-200 flex items-center justify-between shadow-sm gap-4">
+                <div className="flex items-center gap-3">
+                  {selectedSpot.recommendedBoardId === 'saint-apex-pro' && (
+                    <div className="w-10 h-16 bg-slate-50 rounded-lg p-1 border border-slate-200 flex items-center justify-center flex-shrink-0">
+                      <img
+                        src="/saint_apex_pro_carbon.png"
+                        alt={selectedSpot.recommendedBoardName}
+                        referrerPolicy="no-referrer"
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
+                  )}
+                  {selectedSpot.recommendedBoardId === 'sanctuary-carbon-magnet' && (
+                    <div className="w-10 h-16 bg-slate-50 rounded-lg p-1 border border-slate-200 flex items-center justify-center flex-shrink-0">
+                      <img
+                        src="/saint_joe_double_carbon.png"
+                        alt={selectedSpot.recommendedBoardName}
+                        referrerPolicy="no-referrer"
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-slate-500 block">RECOMMENDED WEAPON OF CHOICE</span>
+                    <p className="font-display font-black text-base text-slate-900">{selectedSpot.recommendedBoardName}</p>
+                  </div>
                 </div>
                 <a
                   href="#catalog"
-                  className="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs uppercase font-mono hover:bg-slate-800 transition-colors flex items-center gap-1 shadow-sm"
+                  className="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs uppercase font-mono hover:bg-slate-800 transition-colors flex items-center gap-1 shadow-sm flex-shrink-0"
                 >
                   <span>Shop Board</span> <ArrowRight className="w-3.5 h-3.5" />
                 </a>

@@ -48,11 +48,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenCustomizer }
             className="flex items-center gap-3 group focus:outline-none"
             aria-label="Saint Joe Skimboards Home"
           >
-            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden bg-white border border-slate-200 shadow-sm group-hover:scale-105 transition-transform duration-300 flex-shrink-0 flex items-center justify-center">
+            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden bg-slate-50 border border-slate-200 shadow-sm group-hover:scale-105 transition-transform duration-300 flex-shrink-0 flex items-center justify-center p-1.5">
               <img
-                src="/saint-joe-logo.jpg"
+                src="/saintjoeskim_logo_black.png"
                 alt="Saint Joe Skimboards Logo"
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-contain"
               />
               <div className="absolute inset-0 ring-2 ring-sky-500/0 group-hover:ring-sky-500/40 transition-all rounded-xl" />
             </div>
@@ -186,7 +186,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenCustomizer }
 
           <div className="border-t border-slate-200 pt-6 space-y-4">
             <div className="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-xl">
-              <img src="/saint-joe-logo.jpg" alt="Saint Joe" className="w-10 h-10 rounded-lg object-cover" />
+              <div className="w-10 h-10 rounded-lg bg-white border border-slate-200 p-1 flex items-center justify-center flex-shrink-0">
+                <img src="/saintjoeskim_logo_black.png" alt="Saint Joe" className="w-full h-full object-contain" />
+              </div>
               <div>
                 <p className="text-sm font-black uppercase text-slate-900">SAINT JOE SKiMBOARDS</p>
                 <p className="text-xs text-slate-500">Tacloban City, Philippines, 6500 // Est. 2009</p>

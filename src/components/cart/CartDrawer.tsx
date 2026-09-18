@@ -100,7 +100,7 @@ export const CartDrawer: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-base font-bold text-slate-900">Your quiver is currently empty.</p>
-                  <p className="text-xs text-slate-500 mt-1">Explore our Pro Series or customize your own board.</p>
+                  <p className="text-xs text-slate-500 mt-1">Explore our Saint Joe Double Carbon or customize your own board.</p>
                 </div>
                 <button
                   onClick={() => setIsCartOpen(false)}
@@ -117,8 +117,8 @@ export const CartDrawer: React.FC = () => {
                 >
                   <div className="flex items-start gap-3">
                     {/* Thumbnail */}
-                    <div className="w-14 h-14 rounded-xl bg-white border border-slate-200 flex items-center justify-center p-1 overflow-hidden flex-shrink-0 shadow-sm">
-                      <img src="/saint-joe-logo.jpg" alt="Logo" className="w-full h-full object-cover rounded-lg" />
+                    <div className="w-14 h-14 rounded-xl bg-white border border-slate-200 flex items-center justify-center p-1.5 overflow-hidden flex-shrink-0 shadow-sm">
+                      <img src={item.image || '/saintjoeskim_logo_black.png'} alt="Product" className="w-full h-full object-contain" />
                     </div>
 
                     <div className="flex-1 min-w-0">
@@ -153,9 +153,16 @@ export const CartDrawer: React.FC = () => {
                           )}
                         </div>
                       ) : (
-                        <div className="flex items-center gap-2 mt-1 text-[11px] font-mono text-slate-600">
-                          <span>Size: {item.selectedSize}</span>
-                          {item.selectedColor && <span>• {item.selectedColor}</span>}
+                        <div className="space-y-1 mt-1">
+                          <div className="flex items-center gap-2 text-[11px] font-mono text-slate-600">
+                            <span>Size: {item.selectedSize}</span>
+                            {item.selectedColor && <span>• {item.selectedColor}</span>}
+                          </div>
+                          {item.id === 'saint-joe-woody' && (
+                            <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded font-bold inline-block">
+                              ✓ Free Archbar & Traction Pad Included
+                            </span>
+                          )}
                         </div>
                       )}
                     </div>
