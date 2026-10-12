@@ -212,21 +212,13 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
               <img
                 src={bgImage}
                 alt={`${spot.name} Shorebreak - Saint Joe Skimboards`}
-                className="w-full h-full object-cover object-center filter brightness-90 contrast-105"
+                className="w-full h-full object-cover object-center filter brightness-100 contrast-100"
                 loading={index === 0 ? 'eager' : 'lazy'}
                 referrerPolicy="no-referrer"
               />
 
-              {/* Multi-Layered Contrast Shield: Radial + Vertical Vignettes */}
-              <div className="absolute inset-0 bg-slate-950/40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-slate-950/70" />
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/75 via-transparent to-slate-950/75" />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: 'radial-gradient(circle at center, transparent 20%, rgba(2, 6, 23, 0.8) 100%)'
-                }}
-              />
+              {/* Lightened Contrast Overlay: Keeps background wave photo bright and clearly visible */}
+              <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/60" />
             </div>
 
             {/* Quick Floating Prev / Next Arrow Controls */}
@@ -293,20 +285,20 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
               </div>
 
               {/* Spot Name Headline */}
-              <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl uppercase tracking-tight text-white drop-shadow-2xl mb-2">
+              <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl uppercase tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] mb-2">
                 {spot.name}
               </h2>
 
               {/* Spot Crown Subtitle & Tagline */}
-              <p className="text-sm sm:text-lg md:text-xl text-sky-200 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-md mb-4">
-                <span className="font-bold text-white bg-sky-500/20 px-2.5 py-0.5 rounded-full border border-sky-400/30">
+              <p className="text-sm sm:text-lg md:text-xl text-sky-200 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] mb-4">
+                <span className="font-bold text-white bg-sky-500/30 px-2.5 py-0.5 rounded-full border border-sky-400/40 backdrop-blur-sm">
                   {spot.tag}
                 </span>{' '}
-                • <span className="text-slate-200">{spot.waveType}</span>
+                • <span className="text-white drop-shadow-md">{spot.waveType}</span>
               </p>
 
               {/* Spot Narrative Blurb */}
-              <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed drop-shadow mb-6 font-light">
+              <p className="text-xs sm:text-sm md:text-base text-white max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] mb-6 font-medium">
                 "{spot.blurb}"
               </p>
 
@@ -315,7 +307,7 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
                 {spot.highlights.map((highlight, hIdx) => (
                   <span
                     key={hIdx}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 backdrop-blur-sm text-xs font-mono text-slate-200"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 hover:bg-black/75 border border-white/20 backdrop-blur-md text-xs font-mono text-white shadow-md"
                   >
                     <Sparkles className="w-3 h-3 text-sky-400" />
                     <span>{highlight}</span>
@@ -393,7 +385,7 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
 
               {/* Direct Pricing Badges: Fast-Access Pills */}
               <div className="flex flex-wrap items-center justify-center gap-2.5 text-xs font-mono">
-                <span className="text-slate-400 text-[11px] uppercase tracking-wider font-semibold">
+                <span className="text-white text-[11px] uppercase tracking-wider font-semibold drop-shadow">
                   Direct Pricing Badges:
                 </span>
                 <button
@@ -402,7 +394,7 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
                     onSelectCategory?.('woody');
                     document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-slate-200 hover:text-white transition-colors flex items-center gap-1.5"
+                  className="px-3.5 py-1 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white backdrop-blur-md shadow-sm transition-all flex items-center gap-1.5 hover:scale-105"
                 >
                   <span>Woody</span>
                   <span className="text-emerald-400 font-bold">$75 USD</span>
@@ -413,7 +405,7 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
                     onSelectCategory?.('foamy');
                     document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-slate-200 hover:text-white transition-colors flex items-center gap-1.5"
+                  className="px-3.5 py-1 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white backdrop-blur-md shadow-sm transition-all flex items-center gap-1.5 hover:scale-105"
                 >
                   <span>Foamy</span>
                   <span className="text-emerald-400 font-bold">$155 USD</span>
@@ -424,7 +416,7 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
                     onSelectCategory?.('carbon');
                     document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-slate-200 hover:text-white transition-colors flex items-center gap-1.5"
+                  className="px-3.5 py-1 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white backdrop-blur-md shadow-sm transition-all flex items-center gap-1.5 hover:scale-105"
                 >
                   <span>Carbon</span>
                   <span className="text-emerald-400 font-bold">$220 USD</span>
