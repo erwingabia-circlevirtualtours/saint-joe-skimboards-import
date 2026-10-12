@@ -16,7 +16,7 @@ export const SHAPES: ShapeOption[] = [
     badge: 'PRO SHAPE',
     description: 'Elongated tapered nose, forward wide point (+2.5" forward), and responsive pro shape rails for unmatched rail bite, wrapping power, and high-speed hold in heavy shorebreak.',
     recommendedFor: 'Advanced shorebreak riding, wrapping waves & technical tricks',
-    basePrice: 599,
+    basePrice: 155,
     outlineType: 'pro-shape',
     image: '/saint_joe_foamy.png',
   },
@@ -26,7 +26,7 @@ export const SHAPES: ShapeOption[] = [
     badge: 'NEW WORKSHOP SHAPE',
     description: 'Authentic Saint Joe Fishtail shape with twin fish tail points and hydrodynamic center V-notch. Wide forward chest outline for maximum planing lift and skatey, rapid-fire rail transitions.',
     recommendedFor: 'Maximum planing speed, flatter sandbars & rapid wave wrapping',
-    basePrice: 569,
+    basePrice: 155,
     outlineType: 'fishtail',
     image: '/saint_joe_fishtail.png',
   }
@@ -34,38 +34,38 @@ export const SHAPES: ShapeOption[] = [
 
 export const CORE_LAYUPS = [
   {
-    id: 'double-carbon',
-    name: 'Carbon Fiber (Double Carbon 3K)',
-    subtitle: 'Dual-Layer Aerospace Carbon Top & Bottom',
-    price: 90,
-    tag: 'PRO STIFFNESS',
-    colorPreview: '#12141a',
-    features: ['Max rigidity & instantaneous spring recoil', 'Toray 3K aerospace carbon weave', 'Sub-4.2 lbs total board weight']
+    id: 'woody-marine',
+    name: 'Woody Core (Marine Hardwood + Glass)',
+    subtitle: 'Multi-Ply Philippine Hardwood Composite',
+    price: -80,
+    tag: '$75 USD',
+    colorPreview: '#0284c7',
+    features: ['Natural wood inertia & momentum', 'Extra scratch & sand impact resistance', 'Includes free arch bar & traction pad']
   },
   {
     id: 'foamy-core',
     name: 'Foamy Core (High-Density PVC + E-Glass)',
     subtitle: 'Closed-Cell Foam Core with Double 6oz E-Glass',
     price: 0,
-    tag: 'MAX BUOYANCY',
+    tag: '$155 USD',
     colorPreview: '#c026d3',
     features: ['Exceptional float & early planing lift', 'Forgiving rail carves on mushy waves', 'Vibrant resin color saturation']
   },
   {
-    id: 'woody-marine',
-    name: 'Woody Core (Marine Hardwood + Glass)',
-    subtitle: 'Multi-Ply Philippine Hardwood Composite',
-    price: -40,
-    tag: 'LOCAL FAVORITE',
-    colorPreview: '#0284c7',
-    features: ['Natural wood inertia & momentum', 'Extra scratch & sand impact resistance', 'Includes free arch bar & traction pad']
+    id: 'double-carbon',
+    name: 'Carbon Fiber (Double Carbon 3K)',
+    subtitle: 'Dual-Layer Aerospace Carbon Top & Bottom',
+    price: 65,
+    tag: '$220 USD',
+    colorPreview: '#12141a',
+    features: ['Max rigidity & instantaneous spring recoil', 'Toray 3K aerospace carbon weave', 'Sub-4.2 lbs total board weight']
   },
   {
     id: 'kevlar-weave',
     name: 'Kevlar Carbon Pro Hybrid',
     subtitle: 'Interwoven Kevlar & Carbon with Epoxy',
     price: 75,
-    tag: 'EXTREME IMPACT',
+    tag: '$230 USD',
     colorPreview: '#252932',
     features: ['Bulletproof puncture resistance on rocky sand', 'Damped chatter through chop', 'Ultra high durability']
   }
@@ -175,21 +175,21 @@ export const SIZES = [
     name: 'Medium (51.5")',
     dimensions: '51.5" x 20.25"',
     riderWeight: '140 - 175 lbs (63 - 80 kg)',
-    price: 15
+    price: 0
   },
   {
     id: 'large',
     name: 'Large (53")',
     dimensions: '53.0" x 20.75"',
     riderWeight: '170 - 210 lbs (77 - 95 kg)',
-    price: 25
+    price: 0
   },
   {
     id: 'xlarge',
     name: 'X-Large (55")',
     dimensions: '55.0" x 21.25"',
     riderWeight: '200+ lbs (90+ kg)',
-    price: 35
+    price: 0
   }
 ];
 
@@ -204,13 +204,13 @@ export const THICKNESS_OPTIONS = [
     id: '3-4',
     name: '3/4" (Maximum Float & Glide)',
     description: 'Extra volume for long distance runs and effortless glide across fat water.',
-    price: 20
+    price: 0
   },
   {
     id: 'tapered',
     name: 'Tapered Foil (3/4" center -> 5/8" rails)',
     description: 'Best of both worlds: float under your chest with ultra-thin biting rails.',
-    price: 35
+    price: 0
   }
 ];
 
@@ -225,13 +225,13 @@ export const ROCKER_OPTIONS = [
     id: 'pro-flat',
     name: 'Pro Low Flat Rocker (1.85")',
     description: 'Pure flatland glide and maximum sandbar sprint speed with minimal drag.',
-    price: 15
+    price: 0
   },
   {
     id: 'steep-shorebreak',
     name: 'Shorebreak Extreme Scoop (2.40")',
     description: 'High nose kick engineered to prevent nose-diving into steep dumping sand shelves.',
-    price: 20
+    price: 0
   }
 ];
 

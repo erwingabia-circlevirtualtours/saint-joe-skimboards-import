@@ -341,13 +341,21 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
             
             <div className="space-y-3">
               {CORE_LAYUPS.map((core) => {
-                const isSelected = config.coreMaterial === (core.id === 'double-carbon' ? 'Double Carbon Epoxy' : core.id === 'kevlar-weave' ? 'Kevlar Pro Weave' : 'Aerospace E-Glass');
+                const isSelected = 
+                  (core.id === 'woody-marine' && (config.coreMaterial.includes('Woody') || config.coreMaterial.includes('Wood'))) ||
+                  (core.id === 'foamy-core' && (config.coreMaterial.includes('Foamy') || config.coreMaterial.includes('Foam'))) ||
+                  (core.id === 'double-carbon' && config.coreMaterial.includes('Carbon')) ||
+                  (core.id === 'kevlar-weave' && config.coreMaterial.includes('Kevlar'));
+
+                const targetCoreName = 
+                  core.id === 'woody-marine' ? 'Woody Core' :
+                  core.id === 'foamy-core' ? 'Foamy Core' :
+                  core.id === 'double-carbon' ? 'Double Carbon Epoxy' : 'Kevlar Pro Weave';
+
                 return (
                   <div
                     key={core.id}
-                    onClick={() => onChange({
-                      coreMaterial: (core.id === 'double-carbon' ? 'Double Carbon Epoxy' : core.id === 'kevlar-weave' ? 'Kevlar Pro Weave' : 'Aerospace E-Glass')
-                    })}
+                    onClick={() => onChange({ coreMaterial: targetCoreName })}
                     className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-start justify-between ${
                       isSelected
                         ? 'bg-sky-50 border-sky-500 ring-1 ring-sky-500 shadow-sm'
@@ -373,7 +381,13 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
 
                     <div className="text-right flex-shrink-0 ml-4">
                       <span className="text-xs font-mono font-bold text-sky-700">
-                        {core.price === 0 ? 'Included' : `+$${core.price}`}
+                        {core.id === 'woody-marine'
+                          ? '$75 USD'
+                          : core.id === 'foamy-core'
+                          ? '$155 USD'
+                          : core.id === 'double-carbon'
+                          ? '$220 USD'
+                          : core.price === 0 ? 'Included' : `+$${core.price}`}
                       </span>
                     </div>
                   </div>

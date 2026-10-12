@@ -5,6 +5,7 @@ import { AnnouncementBar } from './components/layout/AnnouncementBar';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { SearchModal } from './components/layout/SearchModal';
+import { SitemapModal } from './components/layout/SitemapModal';
 import { HeroSection } from './components/hero/HeroSection';
 import { CategoryGrid } from './components/categories/CategoryGrid';
 import { CustomBuilder } from './components/customizer/CustomBuilder';
@@ -20,6 +21,7 @@ import { BoardProduct } from './types';
 
 export const AppContent: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSitemapOpen, setIsSitemapOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const scrollToCustomizer = () => {
@@ -30,6 +32,14 @@ export const AppContent: React.FC = () => {
   const handleProductSelectFromSearch = (product: BoardProduct) => {
     setSelectedCategory(product.category);
     const el = document.getElementById('catalog');
+    el?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleNavigateFromSitemap = (sectionId: string, category?: string) => {
+    if (category) {
+      setSelectedCategory(category);
+    }
+    const el = document.getElementById(sectionId);
     el?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -79,7 +89,10 @@ export const AppContent: React.FC = () => {
       </main>
 
       {/* Comprehensive E-Commerce Footer */}
-      <Footer onSelectCategory={(catId) => setSelectedCategory(catId)} />
+      <Footer
+        onSelectCategory={(catId) => setSelectedCategory(catId)}
+        onOpenSitemap={() => setIsSitemapOpen(true)}
+      />
 
       {/* Overlays & Drawers */}
       <CartDrawer />
@@ -88,6 +101,11 @@ export const AppContent: React.FC = () => {
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
         onSelectProduct={handleProductSelectFromSearch}
+      />
+      <SitemapModal
+        isOpen={isSitemapOpen}
+        onClose={() => setIsSitemapOpen(false)}
+        onNavigateSection={handleNavigateFromSitemap}
       />
       <Toast />
 

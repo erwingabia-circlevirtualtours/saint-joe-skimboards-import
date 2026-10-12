@@ -97,6 +97,8 @@ export const BoardVisualizer: React.FC<BoardVisualizerProps> = ({
                   ? '/saint_joe_fishtail.png'
                   : config.coreMaterial.includes('Carbon') || config.coreMaterial.includes('Kevlar')
                   ? '/saint_joe_double_carbon.png'
+                  : config.coreMaterial.includes('Wood')
+                  ? '/saintjoeskim_woody_png.png'
                   : '/saint_joe_foamy.png'
               }
               alt={config.shapeId === 'fishtail' || config.shapeId === 'dude-cruise' || config.tailShape === 'Fishtail' ? 'Saint Joe Fishtail Skimboard' : 'Saint Joe Pro Shape Skimboard'}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage & Main Storefront -->
+  <url>
+    <loc>https://saintjoeskimboards.com/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Skimboard Catalog Categories -->
+  <url>
+    <loc>https://saintjoeskimboards.com/#catalog</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://saintjoeskimboards.com/#woody</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://saintjoeskimboards.com/#foamy</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://saintjoeskimboards.com/#carbon</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Interactive Custom Board Builder Studio -->
+  <url>
+    <loc>https://saintjoeskimboards.com/#custom-builder</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Skimboard Technology, Construction & Anatomy -->
+  <url>
+    <loc>https://saintjoeskimboards.com/#tech-anatomy</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Interactive Rider Sizing & Weight Calculator -->
+  <url>
+    <loc>https://saintjoeskimboards.com/#size-finder</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Philippine Pro Spots Guide (Dahican, Mati, La Union, Siargao, Tacloban) -->
+  <url>
+    <loc>https://saintjoeskimboards.com/#pro-spots</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Verified Rider Reviews & Community Feed -->
+  <url>
+    <loc>https://saintjoeskimboards.com/#reviews</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Factory HQ, Tacloban Workshop & Contact Information -->
+  <url>
+    <loc>https://saintjoeskimboards.com/#footer</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

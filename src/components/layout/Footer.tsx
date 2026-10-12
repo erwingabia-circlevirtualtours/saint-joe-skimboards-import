@@ -3,9 +3,10 @@ import { Mail, Check, ShieldCheck, MapPin, Award, Phone, Globe, Share2, ArrowUp,
 
 interface FooterProps {
   onSelectCategory?: (category: string) => void;
+  onOpenSitemap?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
+export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onOpenSitemap }) => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -168,6 +169,16 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
               <li><a href="#footer" className="hover:text-sky-700 transition-colors">Tacloban City Factory</a></li>
               <li><a href="#footer" className="hover:text-sky-700 transition-colors">Authorized Dealer Portal</a></li>
               <li><a href="#footer" className="hover:text-sky-700 transition-colors">Shorebreak Video Vault</a></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={onOpenSitemap}
+                  className="hover:text-sky-700 text-sky-800 font-bold transition-colors text-left flex items-center gap-1.5 pt-1"
+                >
+                  <span>Site Directory &amp; Sitemap</span>
+                  <span className="text-[10px] font-mono bg-sky-100 text-sky-700 px-1.5 py-0.2 rounded">XML</span>
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -241,7 +252,22 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-mono">
           <p>© {new Date().getFullYear()} SAINT JOE SKiMBOARDS. All rights reserved. Handcrafted in Tacloban City, Philippines, 6500.</p>
           
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
+            <button
+              type="button"
+              onClick={onOpenSitemap}
+              className="hover:text-slate-900 text-sky-700 font-semibold transition-colors"
+            >
+              Sitemap
+            </button>
+            <a
+              href="/sitemap.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-slate-800 transition-colors"
+            >
+              XML Sitemap
+            </a>
             <a href="#" className="hover:text-slate-800 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-slate-800 transition-colors">Terms of Service</a>
             <button

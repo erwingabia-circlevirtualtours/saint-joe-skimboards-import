@@ -15,14 +15,14 @@ export const CustomBuilder: React.FC = () => {
     tailShape: 'Pro Shape',
     size: 'Medium (51.5")',
     thickness: '5/8"',
-    coreMaterial: 'Double Carbon Epoxy',
+    coreMaterial: 'Foamy Core',
     deckStyle: 'Acid Wash Gradient',
     deckColor: '#0066ff',
     deckAccentColor: '#00f0ff',
     bottomColor: '#0a0c10',
     railColor: '#00f0ff',
-    carbonRails: true,
-    carbonStringer: true,
+    carbonRails: false,
+    carbonStringer: false,
     rocker: 'Standard Ocean Rocker',
     tractionPadType: 'Bare Wax Ready',
     tractionColor: '#11141b',
@@ -50,9 +50,10 @@ export const CustomBuilder: React.FC = () => {
 
     // Core Layup
     const core = CORE_LAYUPS.find(c => 
-      (c.id === 'double-carbon' && config.coreMaterial === 'Double Carbon Epoxy') ||
-      (c.id === 'kevlar-weave' && config.coreMaterial === 'Kevlar Pro Weave') ||
-      (c.id === 'aerospace-s-glass' && config.coreMaterial === 'Aerospace E-Glass')
+      (c.id === 'double-carbon' && (config.coreMaterial === 'Double Carbon Epoxy' || config.coreMaterial.includes('Carbon'))) ||
+      (c.id === 'foamy-core' && (config.coreMaterial === 'Foamy Core' || config.coreMaterial.includes('Foam'))) ||
+      (c.id === 'woody-marine' && (config.coreMaterial === 'Woody Core' || config.coreMaterial.includes('Wood'))) ||
+      (c.id === 'kevlar-weave' && config.coreMaterial === 'Kevlar Pro Weave')
     );
     if (core) total += core.price;
 

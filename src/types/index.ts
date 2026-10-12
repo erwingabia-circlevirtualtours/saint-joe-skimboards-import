@@ -48,7 +48,7 @@ export interface CustomBoardConfig {
   tailShape: 'Pro Shape' | 'Fishtail';
   size: 'Small (48")' | 'Medium (51.5")' | 'Large (53")' | 'X-Large (55")' | 'Grom (44")';
   thickness: '5/8"' | '3/4"' | 'Tapered (3/4" to 5/8")';
-  coreMaterial: 'Double Carbon Epoxy' | 'Kevlar Pro Weave' | 'Aerospace E-Glass' | 'Carbon Hybrid';
+  coreMaterial: 'Double Carbon Epoxy' | 'Kevlar Pro Weave' | 'Aerospace E-Glass' | 'Carbon Hybrid' | 'Woody Core' | 'Foamy Core';
   deckStyle: 'Solid Color' | 'Laguna Resin Swirl' | 'Acid Wash Gradient' | 'Stealth Carbon Matrix' | 'Neon Saint Fade';
   deckColor: string;
   deckAccentColor: string;
