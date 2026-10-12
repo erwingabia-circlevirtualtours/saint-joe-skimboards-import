@@ -93,7 +93,7 @@ export const CustomBuilder: React.FC = () => {
         ? `Custom ${config.shapeName} (${config.size.split(' ')[0]} • ${config.customLength}"×${config.customWidth}")`
         : `Custom ${config.shapeName} (${config.size.split(' ')[0]})`,
       price: calculatedPrice,
-      image: '/saint_apex_pro_carbon.png',
+      image: '/saint_joe_double_carbon.png',
       selectedSize: config.size,
       selectedColor: config.deckStyle,
       customConfig: config,

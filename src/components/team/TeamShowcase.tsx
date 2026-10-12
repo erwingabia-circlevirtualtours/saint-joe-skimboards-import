@@ -28,7 +28,7 @@ export const TeamShowcase: React.FC = () => {
             </h2>
           </div>
           <p className="text-sm text-slate-600 max-w-md">
-            From the world-class shorebreak barrels of Dahican in Mati to the legendary wedges of Leyte. Discover where Saint Joe skimboards dominate the coast.
+            From Tanauan, Leyte (national Skimboarding Capital) and Mati (Mindanao Skim Capital) to Lawis Point, Argao ("Siargao of Southern Cebu") and Puka Beach, Boracay. Discover where Saint Joe skimboards dominate the coast.
           </p>
         </div>
 
@@ -93,26 +93,16 @@ export const TeamShowcase: React.FC = () => {
               {/* Recommended Board Link */}
               <div className="p-4 bg-white rounded-2xl border border-slate-200 flex items-center justify-between shadow-sm gap-4">
                 <div className="flex items-center gap-3">
-                  {selectedSpot.recommendedBoardId === 'saint-apex-pro' && (
+                  {selectedSpot.boardImage ? (
                     <div className="w-10 h-16 bg-slate-50 rounded-lg p-1 border border-slate-200 flex items-center justify-center flex-shrink-0">
                       <img
-                        src="/saint_apex_pro_carbon.png"
+                        src={selectedSpot.boardImage}
                         alt={selectedSpot.recommendedBoardName}
                         referrerPolicy="no-referrer"
                         className="max-h-full max-w-full object-contain"
                       />
                     </div>
-                  )}
-                  {selectedSpot.recommendedBoardId === 'sanctuary-carbon-magnet' && (
-                    <div className="w-10 h-16 bg-slate-50 rounded-lg p-1 border border-slate-200 flex items-center justify-center flex-shrink-0">
-                      <img
-                        src="/saint_joe_double_carbon.png"
-                        alt={selectedSpot.recommendedBoardName}
-                        referrerPolicy="no-referrer"
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </div>
-                  )}
+                  ) : null}
                   <div>
                     <span className="text-[10px] font-mono uppercase text-slate-500 block">RECOMMENDED WEAPON OF CHOICE</span>
                     <p className="font-display font-black text-base text-slate-900">{selectedSpot.recommendedBoardName}</p>

@@ -54,8 +54,9 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
 
       {/* Bottom Scroll Cue */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/80 hover:text-white transition-colors cursor-pointer flex flex-col items-center gap-1 z-10">
-        <a href="#categories" aria-label="Scroll down">
-          <ChevronDown className="w-6 h-6 animate-bounce text-white drop-shadow" />
+        <a href="#pro-spots-stack" aria-label="Scroll down to Philippine Pro Spots" className="flex flex-col items-center gap-1 text-[11px] font-mono tracking-wider uppercase text-slate-300 hover:text-white transition-colors">
+          <span className="hidden sm:inline">Explore Philippine Pro Spots</span>
+          <ChevronDown className="w-5 h-5 animate-bounce text-sky-400 drop-shadow" />
         </a>
       </div>
 

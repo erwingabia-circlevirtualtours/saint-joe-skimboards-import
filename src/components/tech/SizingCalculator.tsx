@@ -57,7 +57,7 @@ export const SizingCalculator: React.FC = () => {
     let sizeCategory = 'Medium';
     let sizeDimensions = '51.5" x 20.25"';
     let thickness = '5/8" (Razor Thin Carve)';
-    let recommendedModelId = 'saint-apex-pro';
+    let recommendedModelId = 'sanctuary-carbon-magnet';
 
     if (computedLengthInches <= 46 || weightKg < 45) {
       sizeCategory = 'Grom / Junior';
@@ -68,7 +68,7 @@ export const SizingCalculator: React.FC = () => {
       sizeCategory = 'Small (48" - 49")';
       sizeDimensions = '49.0" x 20.0"';
       thickness = waveType === 'flatland' ? '3/4"' : '5/8"';
-      recommendedModelId = waveType === 'flatland' ? 'saint-joe-fishtail' : 'saint-apex-pro';
+      recommendedModelId = waveType === 'flatland' ? 'saint-joe-woody' : 'saint-joe-foamy';
     } else if (computedLengthInches <= 52 || weightKg < 78) {
       sizeCategory = 'Medium (51.5")';
       sizeDimensions = '51.5" x 20.5"';
@@ -123,6 +123,8 @@ export const SizingCalculator: React.FC = () => {
 
   return (
     <section id="size-finder" className="py-20 bg-slate-50 relative border-b border-slate-200">
+      {/* Anchor alias */}
+      <div id="sizing-calculator" className="absolute -top-16 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}

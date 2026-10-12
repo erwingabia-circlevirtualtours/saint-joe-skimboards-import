@@ -91,6 +91,18 @@ export interface ProSpot {
   image: string;
   thumbnail: string;
   waveType: string;
+  category?: 'carbon' | 'foamy' | 'woody';
+  recommendedPrice?: number;
+  boardImage?: string;
+  coordinates?: string;
+  heroImage?: string;
+  waveSpecs?: {
+    swellDirection: string;
+    bestTide: string;
+    breakType: string;
+    skillLevel: string;
+  };
+  hasMapWidget?: boolean;
 }
 
 export interface TeamRider {

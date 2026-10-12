@@ -42,47 +42,6 @@ export const PRODUCTS: BoardProduct[] = [
     ],
   },
   {
-    id: 'saint-apex-pro',
-    name: 'SAINT APEX PRO CARBON',
-    subtitle: 'The Pinnacle World-Title Shorebreak Weapon',
-    category: 'carbon',
-    price: 220,
-    originalPrice: 260,
-    rating: 4.98,
-    reviewCount: 142,
-    badge: 'WORLD CHAMPION CHOICE',
-    isBestSeller: true,
-    inStock: true,
-    stockCount: 5,
-    description: 'Engineered in collaboration with world champion shorebreak riders. The Saint Apex Pro utilizes our proprietary aerospace-grade Double Carbon 3K weave vacuum-infused with ultra-tough epoxy resin over a high-density Divinycell PVC core. Crisp, razor-sharp rails with seamless wrap transition provide unmatched pop and speed out of the shorebreak pocket.',
-    features: [
-      'Double Carbon 3K Fiber Deck & Bottom Layup',
-      'Ultra-Rigid High-Density High-Impact PVC Core',
-      'Continuous Progressive Nose Rocker with Zero-Drag Flat Tail',
-      'Reinforced Kevlar Rail Impact Zones',
-      'Handcrafted & Hand-Laminated in Tacloban City, Philippines, 6500'
-    ],
-    specs: {
-      core: 'High-Density 75kg/m³ Closed-Cell Structural PVC',
-      layup: 'Double Layer Aerospace 3K Toray Carbon Fiber + Epoxy Resin',
-      rocker: '2.15" Progressive Shorebreak Nose Rocker, 0.1" Flat Tail',
-      tailShape: 'Pro Shape for precision pocket carves',
-      sizes: [
-        { size: 'Small (50.5" x 19.8")', dimensions: '50.5" x 19.8" x 5/8"', riderWeight: '100 - 145 lbs' },
-        { size: 'Medium (52.2" x 20.3")', dimensions: '52.2" x 20.3" x 5/8"', riderWeight: '140 - 175 lbs' },
-        { size: 'Large (53.8" x 20.8")', dimensions: '53.8" x 20.8" x 3/4"', riderWeight: '170 - 210 lbs' },
-        { size: 'XL (55.0" x 21.2")', dimensions: '55.0" x 21.2" x 3/4"', riderWeight: '200+ lbs' },
-      ]
-    },
-    image: '/saint_apex_pro_carbon.png',
-    colorways: [
-      { name: 'Stealth 3K Carbon (World Champion Edition)', hex: '#12141a', accentHex: '#262d3d' },
-      { name: 'Dahican Sky & Ocean', hex: '#38bdf8', accentHex: '#0284c7' },
-      { name: 'Saint Red Acid / Carbon', hex: '#e63946', accentHex: '#12141a' },
-    ],
-    signatureRider: 'Lucas "The Flash" Fink',
-  },
-  {
     id: 'saint-joe-foamy',
     name: 'SAINT JOE FOAMY FIBERGLASS',
     subtitle: 'Turquoise Blue Pro Shape • High-Density Foam Core & Double E-Glass',
@@ -121,47 +80,6 @@ export const PRODUCTS: BoardProduct[] = [
       { name: 'Turquoise Blue (Signature Colorway)', hex: '#0891b2', accentHex: '#06b6d4' },
       { name: 'Magenta Purple / White Rails (Workshop Original)', hex: '#c026d3', accentHex: '#ffffff' },
       { name: 'Sunburst Orange / White Rails (Workshop Original)', hex: '#ea580c', accentHex: '#ffffff' },
-    ],
-  },
-  {
-    id: 'saint-joe-fishtail',
-    name: 'SAINT JOE FOAMY FISHTAIL',
-    subtitle: 'Electric Lime Fishtail • High-Speed Planing & Sandbar Pocket Wraps',
-    category: 'foamy',
-    price: 155,
-    originalPrice: 185,
-    rating: 4.98,
-    reviewCount: 74,
-    badge: 'NEW FISHTAIL SHAPE',
-    isNew: true,
-    isBestSeller: true,
-    inStock: true,
-    stockCount: 7,
-    description: 'The authentic Saint Joe Fishtail shape, fresh off our Tacloban shaping bay. Crafted with a wide-point forward template for immediate planing lift and an aggressive twin-point fishtail with a central hydrodynamic V-notch. The split fishtail gives dual rail-pivot hold when carving into steep shorebreak faces while releasing water through the center for blistering flatland speed. Finished in our workshop-signature vibrant electric lime green resin tint with sunburst yellow rail accents and the iconic white Saint Joe Skim deck brandmark.',
-    features: [
-      'Twin-Point Fishtail with Hydrodynamic Center V-Release Notch',
-      'Workshop-Signature Electric Lime Green Resin Tint with Sunburst Rail Accents',
-      'Wide-Point Forward Chest Template for Maximum Planing & Sinking Resistance',
-      'High-Density Structural PVC Core + Reinforced E-Glass & Carbon Tail Patches',
-      'Crisp White Saint Joe Skim Deck Brandmark Lamination',
-      'Handcrafted with Pride in Tacloban City, Philippines, 6500'
-    ],
-    specs: {
-      core: 'High-Density 75kg/m³ Closed-Cell Structural PVC Core',
-      layup: 'Double 6oz E-Glass Shell + Aerospace Carbon Fishtail Patches & Epoxy Lamination',
-      rocker: '1.95" Progressive Ocean Entry Nose Rocker, Flat Speed Tail',
-      tailShape: 'Hand-Shaped Fishtail with Central V-Release',
-      sizes: [
-        { size: 'Small (49.0" x 20.0")', dimensions: '49.0" x 20.0" x 5/8"', riderWeight: '105 - 145 lbs' },
-        { size: 'Medium (51.5" x 20.5")', dimensions: '51.5" x 20.5" x 5/8" to 3/4" tap', riderWeight: '140 - 180 lbs' },
-        { size: 'Large (53.5" x 21.2")', dimensions: '53.5" x 21.2" x 3/4"', riderWeight: '170 - 215 lbs' },
-      ]
-    },
-    image: '/saint_joe_fishtail.png',
-    colorways: [
-      { name: 'Electric Lime Green / Sunburst (Workshop Original)', hex: '#84cc16', accentHex: '#eab308' },
-      { name: 'Laguna Seafoam / White Stripe', hex: '#14b8a6', accentHex: '#ffffff' },
-      { name: 'Stealth Carbon / Acid Green Rails', hex: '#111827', accentHex: '#84cc16' },
     ],
   },
   {
@@ -244,6 +162,6 @@ export const CATEGORIES = [
     tag: 'HANDCRAFTED',
     gradient: 'from-emerald-600/30 to-teal-500/10',
     accentColor: '#ccff00',
-    image: '/saint_apex_pro_carbon.png',
+    image: '/saint_joe_double_carbon.png',
   }
 ];

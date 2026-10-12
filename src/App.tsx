@@ -7,6 +7,7 @@ import { Footer } from './components/layout/Footer';
 import { SearchModal } from './components/layout/SearchModal';
 import { SitemapModal } from './components/layout/SitemapModal';
 import { HeroSection } from './components/hero/HeroSection';
+import { ProSpotsHeroStack } from './components/hero/ProSpotsHeroStack';
 import { CategoryGrid } from './components/categories/CategoryGrid';
 import { CustomBuilder } from './components/customizer/CustomBuilder';
 import { ProductCatalog } from './components/products/ProductCatalog';
@@ -57,8 +58,14 @@ export const AppContent: React.FC = () => {
 
       {/* Main Content Sections */}
       <main className="flex-1">
-        {/* Hero Section */}
+        {/* Main Brand Hero Section */}
         <HeroSection onOpenCustomizer={scrollToCustomizer} />
+
+        {/* Full-Bleed Philippine Pro Spots Dedicated Hero Stack (Option A) */}
+        <ProSpotsHeroStack
+          onSelectCategory={(catId) => setSelectedCategory(catId)}
+          onOpenCustomizer={scrollToCustomizer}
+        />
 
         {/* Category Quick Grid */}
         <CategoryGrid

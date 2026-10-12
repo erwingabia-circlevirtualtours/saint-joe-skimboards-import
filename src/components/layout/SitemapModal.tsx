@@ -304,41 +304,67 @@ export const SitemapModal: React.FC<SitemapModalProps> = ({
               <ul className="space-y-2 text-xs">
                 <li>
                   <a
-                    href="#pro-spots"
-                    onClick={(e) => handleLinkClick(e, 'pro-spots')}
+                    href="#tanauan-leyte"
+                    onClick={(e) => handleLinkClick(e, 'tanauan-leyte')}
+                    className="group flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition-colors"
+                  >
+                    <div>
+                      <span className="font-semibold text-slate-900 group-hover:text-sky-600">Tanauan Beach, Leyte</span>
+                      <p className="text-[11px] text-slate-500 font-mono">Skimboarding Capital of the Philippines</p>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-sky-600 transition-colors" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#dahican-mati"
+                    onClick={(e) => handleLinkClick(e, 'dahican-mati')}
                     className="group flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition-colors"
                   >
                     <div>
                       <span className="font-semibold text-slate-900 group-hover:text-sky-600">Dahican Beach, Mati</span>
-                      <p className="text-[11px] text-slate-500 font-mono">Philippine Skimboarding Capital</p>
+                      <p className="text-[11px] text-slate-500 font-mono">Skimboarding Capital of Mindanao • Big Wave Arena</p>
                     </div>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-sky-600 transition-colors" />
                   </a>
                 </li>
                 <li>
                   <a
-                    href="#pro-spots"
-                    onClick={(e) => handleLinkClick(e, 'pro-spots')}
+                    href="#dulag-leyte"
+                    onClick={(e) => handleLinkClick(e, 'dulag-leyte')}
                     className="group flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition-colors"
                   >
                     <div>
-                      <span className="font-semibold text-slate-900 group-hover:text-sky-600">San Juan, La Union</span>
-                      <p className="text-[11px] text-slate-500 font-mono">Steep Northern swell shorebreak</p>
+                      <span className="font-semibold text-slate-900 group-hover:text-sky-600">Dulag Shorebreak, Leyte</span>
+                      <p className="text-[11px] text-slate-500 font-mono">Crisp Peeling Wedges &amp; Sandbar Run-ups</p>
                     </div>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-sky-600 transition-colors" />
                   </a>
                 </li>
                 <li>
                   <a
-                    href="#pro-spots"
-                    onClick={(e) => handleLinkClick(e, 'pro-spots')}
+                    href="#pundaquit-magic-left"
+                    onClick={(e) => handleLinkClick(e, 'pundaquit-magic-left')}
                     className="group flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition-colors"
                   >
                     <div>
-                      <span className="font-semibold text-slate-900 group-hover:text-sky-600">Siargao &amp; Zambales</span>
-                      <p className="text-[11px] text-slate-500 font-mono">Tidal reef passes &amp; shorebreak wedges</p>
+                      <span className="font-semibold text-slate-900 group-hover:text-sky-600">Pundaquit's Magic Left, Zambales</span>
+                      <p className="text-[11px] text-slate-500 font-mono">Reef Break • Sweeping Left-Hand Peelers</p>
                     </div>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-sky-600 transition-colors" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#puka-beach-boracay"
+                    onClick={(e) => handleLinkClick(e, 'puka-beach-boracay')}
+                    className="group flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition-colors"
+                  >
+                    <div>
+                      <span className="font-semibold text-slate-900 group-hover:text-cyan-600">Puka Beach, Boracay</span>
+                      <p className="text-[11px] text-slate-500 font-mono">Steep Azure Drop-Off • Puka Shell Shorebreak</p>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-cyan-600 transition-colors" />
                   </a>
                 </li>
               </ul>
