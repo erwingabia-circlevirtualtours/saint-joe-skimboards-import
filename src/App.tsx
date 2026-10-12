@@ -79,7 +79,7 @@ export const AppContent: React.FC = () => {
       </main>
 
       {/* Comprehensive E-Commerce Footer */}
-      <Footer />
+      <Footer onSelectCategory={(catId) => setSelectedCategory(catId)} />
 
       {/* Overlays & Drawers */}
       <CartDrawer />

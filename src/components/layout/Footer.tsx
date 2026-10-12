@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Mail, Check, ShieldCheck, MapPin, Award, Phone, Globe, Share2, ArrowUp, Video, Camera } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onSelectCategory?: (category: string) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -106,12 +110,38 @@ export const Footer: React.FC = () => {
               Skimboards
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#catalog" className="hover:text-sky-700 transition-colors">Saint Apex Pro Carbon</a></li>
-              <li><a href="#catalog" className="hover:text-sky-700 transition-colors">The Miracle Worker Hybrid</a></li>
-              <li><a href="#catalog" className="hover:text-sky-700 transition-colors">Sanctuary Full Carbon 3K</a></li>
-              <li><a href="#catalog" className="hover:text-sky-700 transition-colors">Holy Roller Dude! Shape</a></li>
-              <li><a href="#catalog" className="hover:text-sky-700 transition-colors">Disciple Grom Series</a></li>
-              <li><a href="#custom-builder" className="hover:text-sky-800 text-sky-700 transition-colors font-bold">Launch Custom Builder →</a></li>
+              <li>
+                <a
+                  href="#catalog"
+                  onClick={() => onSelectCategory?.('woody')}
+                  className="hover:text-sky-700 transition-colors block py-0.5"
+                >
+                  Woody
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#catalog"
+                  onClick={() => onSelectCategory?.('foamy')}
+                  className="hover:text-sky-700 transition-colors block py-0.5"
+                >
+                  Foamy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#catalog"
+                  onClick={() => onSelectCategory?.('carbon')}
+                  className="hover:text-sky-700 transition-colors block py-0.5"
+                >
+                  Carbon
+                </a>
+              </li>
+              <li>
+                <a href="#custom-builder" className="hover:text-sky-800 text-sky-700 transition-colors font-bold block pt-1">
+                  Launch Custom Builder →
+                </a>
+              </li>
             </ul>
           </div>
 
