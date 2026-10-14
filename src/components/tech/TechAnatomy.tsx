@@ -44,7 +44,7 @@ export const TechAnatomy: React.FC = () => {
   ];
 
   return (
-    <section id="tech-anatomy" className="py-20 bg-white relative overflow-hidden border-b border-slate-200">
+    <section id="tech-anatomy" className="py-20 bg-white relative overflow-hidden border-b border-slate-200 scroll-mt-20">
       
       {/* Background Carbon Pattern */}
       <div className="absolute inset-0 opacity-5 carbon-bg pointer-events-none" />

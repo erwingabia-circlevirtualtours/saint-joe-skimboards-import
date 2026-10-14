@@ -7,7 +7,7 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = () => {
   return (
-    <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden bg-slate-950 border-b border-slate-200">
+    <section id="hero" className="relative min-h-[90vh] sm:min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 border-b border-slate-200 scroll-mt-20">
       
       {/* Background Action Ocean Wave Photo */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -25,38 +25,37 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center py-20">
         <div className="space-y-6 max-w-3xl mx-auto">
           
-          <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl uppercase tracking-tight text-white drop-shadow-xl">
-            SAINT JOE SKIMBOARDS
-          </h1>
+          <div>
+            <p className="text-sm sm:text-base md:text-lg font-sans font-semibold uppercase tracking-[0.3em] text-white/90 drop-shadow-md mb-2 sm:mb-3">
+              Welcome
+            </p>
+            <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl uppercase tracking-tight text-white drop-shadow-2xl">
+              SAINT JOE SKIMBOARDS
+            </h1>
+          </div>
 
-          <p className="text-lg sm:text-2xl md:text-3xl text-white font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
-            Your quality Philippine made skimboards. We’ve been shaping boards since 2009.
-          </p>
-
-          {/* Action Buttons Inspired by Classic Pure Skim Aesthetics */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+          {/* Action Button */}
+          <div className="flex items-center justify-center pt-2">
             <a
               href="#catalog"
-              className="w-full sm:w-auto px-8 py-3.5 rounded-lg border-2 border-white/80 bg-white/10 hover:bg-white/20 text-white font-display font-bold text-xs uppercase tracking-widest backdrop-blur-sm transition-all shadow-md text-center"
+              className="px-10 py-3.5 rounded-lg border-2 border-white bg-white/15 hover:bg-white hover:text-slate-900 text-white font-display font-black text-xs sm:text-sm uppercase tracking-widest backdrop-blur-md transition-all duration-200 shadow-xl hover:scale-105 active:scale-95 text-center"
             >
-              Our Skimboards
-            </a>
-            <a
-              href="#size-finder"
-              className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-teal-500 hover:bg-teal-600 text-white font-display font-bold text-xs uppercase tracking-widest transition-all shadow-md text-center"
-            >
-              Board Buyer's Guide
+              SHOP
             </a>
           </div>
 
         </div>
       </div>
 
-      {/* Bottom Scroll Cue */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/80 hover:text-white transition-colors cursor-pointer flex flex-col items-center gap-1 z-10">
-        <a href="#pro-spots-stack" aria-label="Scroll down to Philippine Pro Spots" className="flex flex-col items-center gap-1 text-[11px] font-mono tracking-wider uppercase text-slate-300 hover:text-white transition-colors">
-          <span className="hidden sm:inline">Explore Philippine Pro Spots</span>
-          <ChevronDown className="w-5 h-5 animate-bounce text-sky-400 drop-shadow" />
+      {/* Bottom Scroll Cue / See More */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/90 hover:text-white transition-colors cursor-pointer flex flex-col items-center gap-1 z-10">
+        <a
+          href="#pro-spots-stack"
+          aria-label="Scroll down to Philippine Pro Spots"
+          className="group flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 hover:bg-black/60 border border-white/20 backdrop-blur-md text-xs font-mono tracking-wider uppercase text-slate-200 hover:text-white transition-all shadow-lg hover:border-sky-400"
+        >
+          <span>SEE MORE: PRO SPOTS</span>
+          <ChevronDown className="w-4 h-4 animate-bounce text-sky-400 group-hover:text-cyan-300" />
         </a>
       </div>
 

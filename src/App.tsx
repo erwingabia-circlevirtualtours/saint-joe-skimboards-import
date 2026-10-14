@@ -18,6 +18,7 @@ import { ReviewsSection } from './components/reviews/ReviewsSection';
 import { CartDrawer } from './components/cart/CartDrawer';
 import { CheckoutModal } from './components/cart/CheckoutModal';
 import { Toast } from './components/ui/Toast';
+import { CinematicPageTurner } from './components/navigation/CinematicPageTurner';
 import { BoardProduct } from './types';
 
 export const AppContent: React.FC = () => {
@@ -114,6 +115,7 @@ export const AppContent: React.FC = () => {
         onClose={() => setIsSitemapOpen(false)}
         onNavigateSection={handleNavigateFromSitemap}
       />
+      <CinematicPageTurner />
       <Toast />
 
     </div>

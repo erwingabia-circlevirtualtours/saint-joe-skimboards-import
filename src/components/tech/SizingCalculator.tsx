@@ -122,7 +122,7 @@ export const SizingCalculator: React.FC = () => {
   };
 
   return (
-    <section id="size-finder" className="py-20 bg-slate-50 relative border-b border-slate-200">
+    <section id="size-finder" className="py-20 bg-slate-50 relative border-b border-slate-200 scroll-mt-20">
       {/* Anchor alias */}
       <div id="sizing-calculator" className="absolute -top-16 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

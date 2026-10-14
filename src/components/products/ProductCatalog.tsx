@@ -60,7 +60,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
   }, [activeTab, sortBy, inStockOnly]);
 
   return (
-    <section id="catalog" className="py-20 bg-white relative border-b border-slate-200">
+    <section id="catalog" className="py-20 bg-white relative border-b border-slate-200 scroll-mt-20">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

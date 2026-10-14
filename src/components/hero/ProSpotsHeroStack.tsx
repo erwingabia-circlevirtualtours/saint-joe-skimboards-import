@@ -25,6 +25,7 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
 }) => {
   const [activeSpotIndex, setActiveSpotIndex] = useState(0);
   const [isPukaMapOpen, setIsPukaMapOpen] = useState(false);
+  const [isStackInView, setIsStackInView] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
   // IntersectionObserver to detect which spot hero is currently in view
@@ -48,7 +49,20 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    // Track if entire stack is in view to show/hide the local RADAR HUD
+    const stackEl = document.getElementById('pro-spots-stack');
+    const stackObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsStackInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    if (stackEl) stackObserver.observe(stackEl);
+
+    return () => {
+      observer.disconnect();
+      stackObserver.disconnect();
+    };
   }, []);
 
   const scrollToSpot = (spotId: string) => {
@@ -123,14 +137,18 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
   };
 
   return (
-    <div id="pro-spots-stack" className="relative w-full bg-slate-950 text-white">
+    <div id="pro-spots-stack" className="relative w-full bg-slate-950 text-white scroll-mt-20">
       {/* Anchor for Navbar & Footer links */}
-      <div id="pro-spots" className="absolute -top-16 pointer-events-none" />
+      <div id="pro-spots-radar" className="absolute -top-16 pointer-events-none" />
 
-      {/* Floating Side Spot HUD Navigator (Desktop & Tablet) */}
+      {/* Floating Side Spot HUD Navigator (Desktop & Tablet) - Only visible when exploring Pro Spots */}
       <aside
         aria-label="Pro Spot Radar Navigator"
-        className="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-2.5 bg-slate-950/85 backdrop-blur-md p-3 rounded-2xl border border-white/10 shadow-2xl"
+        className={`fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col gap-2.5 bg-slate-950/90 backdrop-blur-md p-3 rounded-2xl border border-white/10 shadow-2xl transition-all duration-300 ${
+          isStackInView
+            ? 'opacity-100 translate-x-0 pointer-events-auto'
+            : 'opacity-0 translate-x-8 pointer-events-none'
+        }`}
       >
         <div className="flex items-center gap-2 pb-2 border-b border-white/10 px-1">
           <span className="relative flex h-2 w-2">
@@ -354,7 +372,7 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
                   <div className="space-y-1.5 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-[10px] font-mono uppercase tracking-wider bg-sky-500/20 text-sky-300 border border-sky-400/30 px-2.5 py-0.5 rounded-full font-bold">
-                        RECOMMENDED WEAPON
+                        WEAPON OF CHOICE
                       </span>
                       {spot.recommendedPrice && (
                         <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-400/20 px-2.5 py-0.5 rounded-full">

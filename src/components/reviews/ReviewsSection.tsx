@@ -4,7 +4,7 @@ import { Star, CheckCircle2, Heart, ThumbsUp, Globe, ArrowRight } from 'lucide-r
 
 export const ReviewsSection: React.FC = () => {
   return (
-    <section id="reviews" className="py-20 bg-slate-50 relative border-b border-slate-200">
+    <section id="reviews" className="py-20 bg-slate-50 relative border-b border-slate-200 scroll-mt-20">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

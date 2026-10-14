@@ -7,9 +7,10 @@ export const TeamShowcase: React.FC = () => {
   const [selectedSpot, setSelectedSpot] = useState<ProSpot>(PRO_SPOTS[0]);
 
   return (
-    <section id="pro-spots" className="py-20 bg-white relative overflow-hidden border-b border-slate-200">
-      {/* Compatibility anchor */}
+    <section id="team-showcase" className="py-20 bg-white relative overflow-hidden border-b border-slate-200 scroll-mt-20">
+      {/* Compatibility anchors */}
       <div id="team-riders" className="absolute -top-10" />
+      <div id="spots-guide" className="absolute -top-10" />
       
       {/* Carbon Texture */}
       <div className="absolute inset-0 opacity-5 carbon-bg pointer-events-none" />
@@ -104,7 +105,7 @@ export const TeamShowcase: React.FC = () => {
                     </div>
                   ) : null}
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-slate-500 block">RECOMMENDED WEAPON OF CHOICE</span>
+                    <span className="text-[10px] font-mono uppercase text-slate-500 block">WEAPON OF CHOICE</span>
                     <p className="font-display font-black text-base text-slate-900">{selectedSpot.recommendedBoardName}</p>
                   </div>
                 </div>

@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onOpenSitemap 
   };
 
   return (
-    <footer id="footer" className="bg-slate-50 border-t border-slate-200 text-slate-600 pt-16 pb-12 relative overflow-hidden">
+    <footer id="footer" className="bg-slate-50 border-t border-slate-200 text-slate-600 pt-16 pb-12 relative overflow-hidden scroll-mt-20">
       
       {/* Background Subtle Carbon Texture */}
       <div className="absolute inset-0 opacity-5 pointer-events-none carbon-bg" />

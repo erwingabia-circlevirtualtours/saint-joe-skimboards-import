@@ -108,7 +108,7 @@ export const CustomBuilder: React.FC = () => {
   };
 
   return (
-    <section id="custom-builder" className="py-20 bg-slate-50 relative overflow-hidden border-b border-slate-200">
+    <section id="custom-builder" className="py-20 bg-slate-50 relative overflow-hidden border-b border-slate-200 scroll-mt-20">
       
       {/* Background Accent Lines */}
       <div className="absolute inset-0 opacity-10 tech-hazard-stripes pointer-events-none" />
