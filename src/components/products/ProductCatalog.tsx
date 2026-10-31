@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { PRODUCTS } from '../../data/products';
 import { BoardProduct } from '../../types';
+import { useAdmin } from '../../context/AdminContext';
 import { ProductCard } from './ProductCard';
 import { QuickViewModal } from './QuickViewModal';
 import { Filter, SlidersHorizontal, Sparkles, Compass, Check } from 'lucide-react';
@@ -14,6 +15,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
   selectedCategory,
   onSelectCategory,
 }) => {
+  const { products: adminProducts } = useAdmin();
   const [activeTab, setActiveTab] = useState<string>(selectedCategory || 'all');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
   const [inStockOnly, setInStockOnly] = useState(false);
@@ -33,8 +35,69 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
     { id: 'carbon', label: 'Carbon Fiber' },
   ];
 
+  // Convert CMS products to BoardProduct storefront models
+  const unifiedProducts: BoardProduct[] = useMemo(() => {
+    if (!adminProducts || adminProducts.length === 0) return PRODUCTS;
+
+    return adminProducts.map((p) => {
+      let mappedCategory: 'woody' | 'foamy' | 'carbon' = 'carbon';
+      if (p.category === 'woodcore') mappedCategory = 'woody';
+      else if (p.category === 'foamcore') mappedCategory = 'foamy';
+
+      // Fallback USD equivalent for cart (~56 PHP / USD)
+      const approxUsd = Math.round(p.pricePHP / 56);
+      const approxOriginalUsd = p.compareAtPricePHP ? Math.round(p.compareAtPricePHP / 56) : undefined;
+
+      return {
+        id: p.id,
+        name: p.name,
+        subtitle: p.subtitle,
+        category: mappedCategory,
+        price: approxUsd,
+        originalPrice: approxOriginalUsd,
+        localPricePhp: `₱${p.pricePHP.toLocaleString()} PHP`,
+        freeInclusions: p.freeInclusions || 'FREE Arch Bar & Traction Pad Included',
+        rating: 4.98,
+        reviewCount: 45 + (p.stockQty * 3),
+        badge: p.bestSeller ? 'BEST SELLER' : p.featured ? 'FEATURED' : undefined,
+        isNew: true,
+        isBestSeller: p.bestSeller,
+        inStock: p.inStock,
+        stockCount: p.stockQty,
+        description: p.description,
+        features: [
+          `Dimensions: ${p.specs.lengthInches} x ${p.specs.widthInches} x ${p.specs.thicknessInches}`,
+          `Rider Weight: ${p.specs.weightCapacityKg}`,
+          `Rocker: ${p.specs.rockerProfile}`,
+          `Core: ${p.specs.coreMaterial}`,
+          `Layup: ${p.specs.lamination}`,
+          `Rails: ${p.specs.railContour}`,
+        ],
+        specs: {
+          core: p.specs.coreMaterial,
+          layup: p.specs.lamination,
+          rocker: p.specs.rockerProfile,
+          tailShape: p.specs.railContour,
+          sizes: [
+            {
+              size: p.specs.lengthInches,
+              dimensions: `${p.specs.lengthInches} x ${p.specs.widthInches} x ${p.specs.thicknessInches}`,
+              riderWeight: p.specs.weightCapacityKg,
+            },
+          ],
+        },
+        image: p.image,
+        colorways: [
+          { name: 'Standard Finish', hex: '#0284c7', accentHex: '#38bdf8' },
+          { name: 'Stealth Carbon Matrix', hex: '#0f172a', accentHex: '#0284c7' },
+        ],
+        signatureRider: p.signatureRider,
+      };
+    });
+  }, [adminProducts]);
+
   const filteredProducts = useMemo(() => {
-    let list = PRODUCTS.filter(p => {
+    let list = unifiedProducts.filter(p => {
       if (activeTab !== 'all') {
         if (p.category !== activeTab) {
           return false;
@@ -57,7 +120,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
       default:
         return list;
     }
-  }, [activeTab, sortBy, inStockOnly]);
+  }, [unifiedProducts, activeTab, sortBy, inStockOnly]);
 
   return (
     <section id="catalog" className="py-20 bg-white relative border-b border-slate-200 scroll-mt-20">

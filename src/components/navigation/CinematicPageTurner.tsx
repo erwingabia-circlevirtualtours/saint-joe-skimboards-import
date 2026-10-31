@@ -116,7 +116,7 @@ export const CinematicPageTurner: React.FC = () => {
   const slideToPage = useCallback((index: number) => {
     if (index < 0 || index >= CHAPTERS.length) return;
     const target = CHAPTERS[index];
-    const el = document.getElementById(target.id);
+    const el = document.getElementById(target.id) || (target.id === 'pro-spots-stack' ? document.getElementById('pro-spots') : null);
 
     if (el) {
       isNavigatingRef.current = true;

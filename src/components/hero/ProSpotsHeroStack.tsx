@@ -50,7 +50,7 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
     });
 
     // Track if entire stack is in view to show/hide the local RADAR HUD
-    const stackEl = document.getElementById('pro-spots-stack');
+    const stackEl = document.getElementById('pro-spots') || document.getElementById('pro-spots-stack');
     const stackObserver = new IntersectionObserver(
       ([entry]) => {
         setIsStackInView(entry.isIntersecting);
@@ -94,7 +94,7 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
       const targetTag = (e.target as HTMLElement)?.tagName?.toLowerCase();
       if (targetTag === 'input' || targetTag === 'textarea') return;
 
-      const stackEl = document.getElementById('pro-spots-stack');
+      const stackEl = document.getElementById('pro-spots') || document.getElementById('pro-spots-stack');
       if (!stackEl) return;
       const rect = stackEl.getBoundingClientRect();
       const isInStackZone = rect.top < window.innerHeight && rect.bottom > 0;
@@ -137,8 +137,9 @@ export const ProSpotsHeroStack: React.FC<ProSpotsHeroStackProps> = ({
   };
 
   return (
-    <div id="pro-spots-stack" className="relative w-full bg-slate-950 text-white scroll-mt-20">
-      {/* Anchor for Navbar & Footer links */}
+    <div id="pro-spots" className="relative w-full bg-slate-950 text-white scroll-mt-20">
+      {/* Anchor aliases for Navbar, Page Turner, Footer & deep links */}
+      <div id="pro-spots-stack" className="absolute inset-0 pointer-events-none" />
       <div id="pro-spots-radar" className="absolute -top-16 pointer-events-none" />
 
       {/* Floating Side Spot HUD Navigator (Desktop & Tablet) - Only visible when exploring Pro Spots */}

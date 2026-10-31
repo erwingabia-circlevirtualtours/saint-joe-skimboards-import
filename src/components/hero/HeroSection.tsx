@@ -50,7 +50,12 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
       {/* Bottom Scroll Cue / See More */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/90 hover:text-white transition-colors cursor-pointer flex flex-col items-center gap-1 z-10">
         <a
-          href="#pro-spots-stack"
+          href="#pro-spots"
+          onClick={(e) => {
+            e.preventDefault();
+            const target = document.getElementById('pro-spots') || document.getElementById('pro-spots-stack');
+            target?.scrollIntoView({ behavior: 'smooth' });
+          }}
           aria-label="Scroll down to Philippine Pro Spots"
           className="group flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 hover:bg-black/60 border border-white/20 backdrop-blur-md text-xs font-mono tracking-wider uppercase text-slate-200 hover:text-white transition-all shadow-lg hover:border-sky-400"
         >

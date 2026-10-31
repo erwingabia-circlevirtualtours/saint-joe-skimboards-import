@@ -392,6 +392,19 @@ export const SitemapModal: React.FC<SitemapModalProps> = ({
                 </li>
                 <li>
                   <a
+                    href="#news"
+                    onClick={(e) => handleLinkClick(e, 'news')}
+                    className="group flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition-colors"
+                  >
+                    <div>
+                      <span className="font-semibold text-slate-900 group-hover:text-sky-600">News &amp; Contest Reports</span>
+                      <p className="text-[11px] text-slate-500 font-mono">One Drop Slide Zambales 1-2-3 Podium Lockout</p>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-sky-600 transition-colors" />
+                  </a>
+                </li>
+                <li>
+                  <a
                     href="#reviews"
                     onClick={(e) => handleLinkClick(e, 'reviews')}
                     className="group flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition-colors"

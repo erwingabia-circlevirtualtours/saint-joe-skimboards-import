@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
-import { Search, ShoppingBag, Heart, Menu, X, Compass, Sliders, Layers, MapPin, Star, ArrowRight, Phone, Mail, Video, Camera, Globe } from 'lucide-react';
+import { useAdmin } from '../../context/AdminContext';
+import { Search, ShoppingBag, Heart, Menu, X, Compass, Sliders, Layers, MapPin, Star, Newspaper, ArrowRight, Phone, Mail, Video, Camera, Globe, Lock } from 'lucide-react';
 
 interface NavbarProps {
   onOpenSearch: () => void;
   onOpenCustomizer: () => void;
+  currentView?: 'home' | 'news';
+  onNavigateHome?: () => void;
+  onNavigateNews?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenCustomizer }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  onOpenSearch,
+  onOpenCustomizer,
+  currentView = 'home',
+  onNavigateHome,
+  onNavigateNews
+}) => {
   const { totalItems, setIsCartOpen } = useCart();
   const { totalWishlist } = useWishlist();
+  const { isAuthenticated, openLoginModal, setIsAdminPortalOpen } = useAdmin();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -29,7 +40,55 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenCustomizer }
     { name: 'Size Finder', href: '#size-finder', icon: Sliders },
     { name: 'Pro Spots', href: '#pro-spots', icon: MapPin },
     { name: 'Reviews', href: '#reviews', icon: Star },
+    { name: 'News', href: '#news', icon: Newspaper },
   ];
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    link: (typeof navLinks)[0]
+  ) => {
+    if (link.name === 'News') {
+      e.preventDefault();
+      onNavigateNews?.();
+      return;
+    }
+
+    if (currentView === 'news') {
+      e.preventDefault();
+      onNavigateHome?.();
+      if (link.name === 'Custom Builder') {
+        setTimeout(() => onOpenCustomizer(), 100);
+      } else if (link.href.startsWith('#')) {
+        const targetId = link.href.substring(1);
+        setTimeout(() => {
+          const targetEl =
+            document.getElementById(targetId) ||
+            (targetId === 'pro-spots' ? document.getElementById('pro-spots-stack') : null);
+          targetEl?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+      return;
+    }
+
+    if (link.name === 'Custom Builder') {
+      e.preventDefault();
+      onOpenCustomizer();
+      return;
+    }
+
+    if (link.href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = link.href.substring(1);
+      const targetEl =
+        document.getElementById(targetId) ||
+        (targetId === 'pro-spots' ? document.getElementById('pro-spots-stack') : null);
+
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState(null, '', link.href);
+      }
+    }
+  };
 
   return (
     <>
@@ -45,6 +104,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenCustomizer }
           {/* Brand Logo & Name */}
           <a
             href="#"
+            onClick={(e) => {
+              if (currentView === 'news') {
+                e.preventDefault();
+                onNavigateHome?.();
+              }
+            }}
             className="flex items-center gap-3 group focus:outline-none"
             aria-label="Saint Joe Skimboards Home"
           >
@@ -71,25 +136,27 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenCustomizer }
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
             {navLinks.map((link) => {
               const Icon = link.icon;
+              const isNewsActive = link.name === 'News' && currentView === 'news';
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => {
-                    if (link.name === 'Custom Builder') {
-                      onOpenCustomizer();
-                    }
-                  }}
+                  onClick={(e) => handleNavClick(e, link)}
                   className={`px-3 py-2 rounded-lg text-xs lg:text-sm font-semibold tracking-wide transition-all duration-200 flex items-center gap-1.5 ${
-                    link.isSpecial
+                    isNewsActive
+                      ? 'bg-sky-50 text-sky-800 border border-sky-300 shadow-2xs font-bold'
+                      : link.isSpecial
                       ? 'bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 hover:border-sky-300 shadow-sm'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${link.isSpecial ? 'text-sky-600' : 'text-slate-500'}`} />
+                  <Icon className={`w-3.5 h-3.5 ${isNewsActive ? 'text-sky-600' : link.isSpecial ? 'text-sky-600' : 'text-slate-500'}`} />
                   {link.name}
                   {link.isSpecial && (
                     <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-ping" />
+                  )}
+                  {link.name === 'News' && !isNewsActive && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                   )}
                 </a>
               );
@@ -99,6 +166,26 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenCustomizer }
           {/* Action Icons */}
           <div className="flex items-center gap-2 sm:gap-3">
             
+            {/* Staff CMS Lock Trigger */}
+            <button
+              onClick={() => {
+                if (isAuthenticated) {
+                  setIsAdminPortalOpen(true);
+                } else {
+                  openLoginModal();
+                }
+              }}
+              title="Staff CMS & Shaping Bay Portal (Ctrl+Shift+A)"
+              aria-label="Staff CMS Portal"
+              className={`p-2.5 rounded-xl transition-all border ${
+                isAuthenticated
+                  ? 'bg-amber-500/10 text-amber-600 border-amber-300 hover:bg-amber-500/20 shadow-2xs'
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 border-slate-200'
+              }`}
+            >
+              <Lock className="w-4 h-4" />
+            </button>
+
             {/* Search Trigger */}
             <button
               onClick={onOpenSearch}
@@ -158,18 +245,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenCustomizer }
             </div>
             {navLinks.map((link) => {
               const Icon = link.icon;
+              const isNewsActive = link.name === 'News' && currentView === 'news';
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => {
+                  onClick={(e) => {
                     setMobileMenuOpen(false);
-                    if (link.name === 'Custom Builder') {
-                      onOpenCustomizer();
-                    }
+                    handleNavClick(e, link);
                   }}
                   className={`flex items-center justify-between p-3.5 rounded-xl text-base font-bold uppercase tracking-wider ${
-                    link.isSpecial
+                    isNewsActive
+                      ? 'bg-sky-50 text-sky-800 border border-sky-300 shadow-xs'
+                      : link.isSpecial
                       ? 'bg-sky-50 text-sky-800 border border-sky-300'
                       : 'bg-slate-50 text-slate-800 hover:bg-slate-100 border border-slate-200'
                   }`}
@@ -177,6 +265,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenCustomizer }
                   <div className="flex items-center gap-3">
                     <Icon className="w-5 h-5 text-sky-600" />
                     <span>{link.name}</span>
+                    {link.name === 'News' && !isNewsActive && (
+                      <span className="text-[10px] font-mono bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">
+                        NEW
+                      </span>
+                    )}
                   </div>
                   <ArrowRight className="w-4 h-4 text-slate-400" />
                 </a>

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Mail, Check, ShieldCheck, MapPin, Award, Phone, Globe, Share2, ArrowUp, Video, Camera } from 'lucide-react';
+import { useAdmin } from '../../context/AdminContext';
+import { Mail, Check, ShieldCheck, MapPin, Award, Phone, Globe, Share2, ArrowUp, Video, Camera, Lock } from 'lucide-react';
 
 interface FooterProps {
   onSelectCategory?: (category: string) => void;
   onOpenSitemap?: () => void;
+  onNavigateNews?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onOpenSitemap }) => {
+export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onOpenSitemap, onNavigateNews }) => {
+  const { isAuthenticated, openLoginModal, setIsAdminPortalOpen } = useAdmin();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -166,7 +169,42 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onOpenSitemap 
             <ul className="space-y-2 text-xs">
               <li><a href="#pro-spots" className="hover:text-sky-700 transition-colors">Philippine Pro Spots</a></li>
               <li><a href="#reviews" className="hover:text-sky-700 transition-colors">Verified Rider Reviews</a></li>
+              <li>
+                <a
+                  href="#news"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateNews?.();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="hover:text-sky-700 transition-colors flex items-center gap-1.5"
+                >
+                  <span>News &amp; Contest Reports</span>
+                  <span className="text-[9px] font-mono bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded font-bold">
+                    NEW
+                  </span>
+                </a>
+              </li>
               <li><a href="#footer" className="hover:text-sky-700 transition-colors">Tacloban City Factory</a></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (isAuthenticated) {
+                      setIsAdminPortalOpen(true);
+                    } else {
+                      openLoginModal();
+                    }
+                  }}
+                  className="hover:text-sky-700 text-slate-600 transition-colors flex items-center gap-1.5 text-left"
+                >
+                  <Lock className="w-3 h-3 text-slate-400" />
+                  <span>Staff Shaping CMS</span>
+                  <span className="text-[9px] font-mono bg-amber-100 text-amber-800 px-1 py-0.2 rounded font-bold">
+                    PIN
+                  </span>
+                </button>
+              </li>
               <li><a href="#footer" className="hover:text-sky-700 transition-colors">Authorized Dealer Portal</a></li>
               <li><a href="#footer" className="hover:text-sky-700 transition-colors">Shorebreak Video Vault</a></li>
               <li>
@@ -250,7 +288,22 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onOpenSitemap 
 
         {/* Bottom Bar: Copyright & Back to Top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-mono">
-          <p>© {new Date().getFullYear()} SAINT JOE SKiMBOARDS. All rights reserved. Handcrafted in Tacloban City, Philippines, 6500.</p>
+          <p className="flex items-center gap-1.5 flex-wrap">
+            <span>© {new Date().getFullYear()} SAINT JOE SKiMBOARDS. All rights reserved. Handcrafted in Tacloban City, Philippines, 6500.</span>
+            <button
+              onClick={() => {
+                if (isAuthenticated) {
+                  setIsAdminPortalOpen(true);
+                } else {
+                  openLoginModal();
+                }
+              }}
+              title="Staff Portal (Ctrl+Shift+A)"
+              className="text-slate-400 hover:text-amber-500 transition-colors p-1"
+            >
+              <Lock className="w-3 h-3" />
+            </button>
+          </p>
           
           <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
             <button
