@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { CmsProduct, CmsCategory, CATEGORY_LABELS } from '../../types/cms';
+import { CmsProduct, CmsCategory, CATEGORY_LABELS, FACTORY_IMAGE_PRESETS } from '../../types/cms';
 import { compressImageFile, formatBytes, CompressionResult, getFileFromClipboard } from '../../utils/imageCompression';
 import {
   X,
@@ -14,7 +14,9 @@ import {
   Trash2,
   RefreshCw,
   Info,
-  DollarSign
+  DollarSign,
+  Palette,
+  CheckCircle2
 } from 'lucide-react';
 
 interface ProductFormModalProps {
@@ -58,7 +60,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
   const [railContour, setRailContour] = useState('Boxy 60/40 Rail Contour with Clean Release Tail');
 
   // Image & Compression Pipeline
-  const [imageTab, setImageTab] = useState<'upload' | 'url'>('upload');
+  const [imageTab, setImageTab] = useState<'upload' | 'presets' | 'url'>('upload');
   const [imageUrl, setImageUrl] = useState('');
   const [imageWebLinkInput, setImageWebLinkInput] = useState('');
   const [compressing, setCompressing] = useState(false);
@@ -278,6 +280,15 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
                 </button>
                 <button
                   type="button"
+                  onClick={() => setImageTab('presets')}
+                  className={`px-3 py-1.5 rounded-lg transition-all ${
+                    imageTab === 'presets' ? 'bg-sky-600 text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  Factory Presets
+                </button>
+                <button
+                  type="button"
                   onClick={() => setImageTab('url')}
                   className={`px-3 py-1.5 rounded-lg transition-all ${
                     imageTab === 'url' ? 'bg-sky-600 text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'
@@ -289,7 +300,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
             </div>
 
             {/* Upload & Dropzone Mode */}
-            {imageTab === 'upload' ? (
+            {imageTab === 'upload' && (
               <div className="space-y-3">
                 <div
                   onDragOver={(e) => {
@@ -381,7 +392,57 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
                   )}
                 </div>
               </div>
-            ) : (
+            )}
+
+            {/* Factory Image Presets Mode */}
+            {imageTab === 'presets' && (
+              <div className="space-y-3">
+                <p className="text-xs text-slate-400 font-mono">
+                  Select an official Saint Joe Skimboards high-resolution factory shaped asset:
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 max-h-60 overflow-y-auto pr-1">
+                  {FACTORY_IMAGE_PRESETS.map((preset) => {
+                    const isSelected = imageUrl === preset.url;
+                    return (
+                      <button
+                        key={preset.url}
+                        type="button"
+                        onClick={() => {
+                          setImageUrl(preset.url);
+                          setCompressionStats(null);
+                          setErrors((prev) => ({ ...prev, image: '' }));
+                        }}
+                        className={`group p-2 rounded-xl border text-left transition-all flex flex-col items-center relative ${
+                          isSelected
+                            ? 'bg-sky-950/60 border-sky-400 shadow-md shadow-sky-500/20 ring-1 ring-sky-400'
+                            : 'bg-slate-900 border-slate-800 hover:border-slate-700 hover:bg-slate-850'
+                        }`}
+                      >
+                        <div className="w-full h-20 bg-slate-950 rounded-lg flex items-center justify-center p-1 overflow-hidden">
+                          <img
+                            src={preset.url}
+                            alt={preset.name}
+                            className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform"
+                          />
+                        </div>
+                        <div className="mt-2 w-full text-center">
+                          <p className="text-[11px] font-bold text-white truncate">{preset.name}</p>
+                          <p className="text-[9px] font-mono text-slate-400 uppercase">{preset.category}</p>
+                        </div>
+                        {isSelected && (
+                          <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-sky-500 flex items-center justify-center">
+                            <Check className="w-2.5 h-2.5 text-white" />
+                          </div>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Web Link Mode */}
+            {imageTab === 'url' && (
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -695,7 +756,15 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
                 type="number"
                 min="0"
                 value={stockQty}
-                onChange={(e) => setStockQty(Number(e.target.value))}
+                onChange={(e) => {
+                  const val = Math.max(0, parseInt(e.target.value) || 0);
+                  setStockQty(val);
+                  if (val === 0) {
+                    setInStock(false);
+                  } else if (!inStock) {
+                    setInStock(true);
+                  }
+                }}
                 className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-sm font-mono text-white"
               />
             </div>
@@ -733,7 +802,15 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
               <input
                 type="checkbox"
                 checked={inStock}
-                onChange={(e) => setInStock(e.target.checked)}
+                onChange={(e) => {
+                  const checked = e.target.checked;
+                  setInStock(checked);
+                  if (!checked) {
+                    setStockQty(0);
+                  } else if (stockQty === 0) {
+                    setStockQty(5);
+                  }
+                }}
                 className="w-4 h-4 rounded text-sky-600 bg-slate-950 border-slate-700 focus:ring-sky-500"
               />
               <span className={inStock ? 'text-emerald-400 font-bold' : 'text-slate-500'}>

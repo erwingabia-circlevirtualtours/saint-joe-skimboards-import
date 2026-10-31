@@ -3,18 +3,27 @@ import { useAdmin } from '../../context/AdminContext';
 import { Lock, ShieldCheck, KeyRound, X, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
 
 export const AdminLoginModal: React.FC = () => {
-  const { isLoginModalOpen, closeLoginModal, login } = useAdmin();
+  const { isLoginModalOpen, closeLoginModal, login, failedAttempts, lockoutUntil } = useAdmin();
   const [pin, setPin] = useState('');
   const [staffName, setStaffName] = useState('Erwin G. (Head Shaper)');
   const [error, setError] = useState<string | null>(null);
   const [shake, setShake] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   if (!isLoginModalOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const isCurrentlyLockedOut = Boolean(lockoutUntil && Date.now() < lockoutUntil);
+  const remainingMins = lockoutUntil ? Math.ceil((lockoutUntil - Date.now()) / 60000) : 0;
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isCurrentlyLockedOut) return;
+
     setError(null);
-    const result = login(pin, staffName);
+    setLoading(true);
+    const result = await login(pin, staffName);
+    setLoading(false);
+
     if (!result.success) {
       setError(result.message);
       setShake(true);
@@ -24,21 +33,8 @@ export const AdminLoginModal: React.FC = () => {
     }
   };
 
-  const handleKeypadPress = (val: string) => {
-    if (val === 'CLEAR') {
-      setPin('');
-      setError(null);
-    } else if (val === 'BACK') {
-      setPin((prev) => prev.slice(0, -1));
-    } else {
-      if (pin.length < 16) {
-        setPin((prev) => prev + val);
-      }
-    }
-  };
-
-  const handleQuickDemoPin = () => {
-    setPin('saintjoe2026');
+  const handleQuickDemoPin = (code: string) => {
+    setPin(code);
     setError(null);
   };
 
@@ -98,18 +94,29 @@ export const AdminLoginModal: React.FC = () => {
           </div>
 
           <div>
-            <div className="flex items-center justify-between mb-1.5">
+            <div className="flex items-center justify-between mb-1.5 flex-wrap gap-1">
               <label className="text-[11px] font-mono uppercase text-slate-400 flex items-center gap-1.5">
                 <KeyRound className="w-3.5 h-3.5 text-sky-400" />
                 <span>Security PIN Code</span>
               </label>
-              <button
-                type="button"
-                onClick={handleQuickDemoPin}
-                className="text-[10px] font-mono text-sky-400 hover:text-sky-300 underline"
-              >
-                Use Staff Key: saintjoe2026
-              </button>
+              <div className="flex items-center gap-2 text-[10px] font-mono text-sky-400">
+                <span>Quick Fill:</span>
+                <button
+                  type="button"
+                  onClick={() => handleQuickDemoPin('saintjoe2026')}
+                  className="hover:text-sky-300 underline"
+                >
+                  saintjoe2026
+                </button>
+                <span>/</span>
+                <button
+                  type="button"
+                  onClick={() => handleQuickDemoPin('wolf2026')}
+                  className="hover:text-amber-400 underline text-amber-300"
+                >
+                  wolf2026
+                </button>
+              </div>
             </div>
 
             <div className="relative">
@@ -117,34 +124,45 @@ export const AdminLoginModal: React.FC = () => {
                 type="password"
                 required
                 autoFocus
+                disabled={isCurrentlyLockedOut}
                 value={pin}
                 onChange={(e) => setPin(e.target.value)}
-                placeholder="Enter PIN code..."
-                className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-center text-lg font-mono font-bold tracking-widest text-sky-400 placeholder-slate-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                placeholder={isCurrentlyLockedOut ? `Locked for ${remainingMins}m` : 'Enter PIN code...'}
+                className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-center text-lg font-mono font-bold tracking-widest text-sky-400 placeholder-slate-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
 
-            {error && (
+            {isCurrentlyLockedOut ? (
+              <div className="mt-2 text-xs font-mono text-rose-400 flex items-center gap-1.5 bg-rose-500/10 p-2.5 rounded-lg border border-rose-500/30">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>Security Lockout: 5 failed attempts reached. Retry in {remainingMins} minute(s).</span>
+              </div>
+            ) : error ? (
               <div className="mt-2 text-xs font-mono text-rose-400 flex items-center gap-1.5 bg-rose-500/10 p-2 rounded-lg border border-rose-500/20">
                 <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                 <span>{error}</span>
               </div>
-            )}
+            ) : failedAttempts > 0 ? (
+              <p className="mt-1 text-[11px] font-mono text-amber-400">
+                Warning: {failedAttempts} of 5 failed attempts logged.
+              </p>
+            ) : null}
           </div>
 
           {/* 12-Hour Session Notice */}
           <div className="p-3 bg-slate-800/60 rounded-xl border border-slate-700/60 flex items-start gap-2.5 text-xs text-slate-300">
             <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
             <div className="text-[11px] leading-relaxed">
-              <strong className="text-white">12-Hour Session Persistence:</strong> Once unlocked, your session stays active in this browser. Works 100% offline &amp; S3 static hosting ready.
+              <strong className="text-white">SHA-256 Hardened Auth:</strong> Zero-plaintext evaluation in JS bundles. Session persists for 12 hours. 100% S3 static hosting compatible.
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white font-display font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-sky-600/30 flex items-center justify-center gap-2 group"
+            disabled={isCurrentlyLockedOut || loading}
+            className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 disabled:opacity-50 disabled:cursor-not-allowed text-white font-display font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-sky-600/30 flex items-center justify-center gap-2 group"
           >
-            <span>Unlock Admin Panel</span>
+            <span>{loading ? 'Evaluating SHA-256 Digest...' : 'Unlock Admin Panel'}</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
         </form>

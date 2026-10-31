@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAdmin } from '../../context/AdminContext';
-import { CmsOrder, OrderState } from '../../types/cms';
+import { CmsOrder, OrderState, cleanGCashRef, isValidGCashRef } from '../../types/cms';
 import {
   Search,
   Filter,
@@ -125,8 +125,10 @@ export const OrderManager: React.FC = () => {
 
   const handleConfirmVerification = () => {
     if (!verifyingOrderId) return;
-    verifyGcashPayment(verifyingOrderId, verificationRefInput.trim());
-    setVerifyingOrderId(null);
+    const res = verifyGcashPayment(verifyingOrderId, verificationRefInput.trim());
+    if (res?.success !== false) {
+      setVerifyingOrderId(null);
+    }
   };
 
   const handleOpenDispatchModal = (order: CmsOrder) => {
@@ -449,7 +451,7 @@ export const OrderManager: React.FC = () => {
 
             <div>
               <label className="text-xs font-mono uppercase text-slate-400 block mb-1">
-                GCash 13-Digit Reference Number
+                GCash 12 or 13-Digit Reference Number
               </label>
               <input
                 type="text"
@@ -458,6 +460,16 @@ export const OrderManager: React.FC = () => {
                 placeholder="e.g. 9012384910283"
                 className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-sm font-mono text-cyan-300 focus:outline-none focus:border-emerald-500"
               />
+              <div className="mt-1.5 flex items-center justify-between text-[11px] font-mono">
+                <span className={isValidGCashRef(cleanGCashRef(verificationRefInput)) ? 'text-emerald-400 font-semibold' : 'text-amber-400'}>
+                  Digits: {cleanGCashRef(verificationRefInput).length} / 12–13
+                </span>
+                {isValidGCashRef(cleanGCashRef(verificationRefInput)) ? (
+                  <span className="text-emerald-400 font-bold">✓ Valid GCash Format</span>
+                ) : (
+                  <span className="text-slate-500">Standard Philippine GCash receipt number</span>
+                )}
+              </div>
             </div>
 
             <div className="pt-2 flex items-center justify-end gap-2">

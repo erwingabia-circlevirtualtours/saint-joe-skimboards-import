@@ -49,9 +49,93 @@ export const SkimboardProductSchema = z.object({
   freeInclusions: z.string().optional(),
   signatureRider: z.string().optional(),
   updatedAt: z.string(),
+}).refine((data) => {
+  // Enforce stock consistency: if stockQty is 0, inStock must be false.
+  // If inStock is true, stockQty must be > 0.
+  if (data.stockQty === 0 && data.inStock) return false;
+  if (data.stockQty > 0 && !data.inStock) return false;
+  return true;
+}, {
+  message: 'inStock toggle must strictly match stockQty: inStock requires stockQty > 0, and 0 stock must be marked Out of Stock',
+  path: ['inStock']
 });
 
 export type CmsProduct = z.infer<typeof SkimboardProductSchema>;
+
+// GCash Reference Sanitization & Validation Helpers (12 to 13 Digits)
+export const cleanGCashRef = (raw: string): string => raw.replace(/\D/g, '');
+
+export const isValidGCashRef = (cleaned: string): boolean => {
+  return /^\d{12,13}$/.test(cleaned);
+};
+
+// Factory Asset Image Presets for Instant 1-Click Selection
+export interface FactoryImagePreset {
+  id: string;
+  name: string;
+  category: string;
+  url: string;
+  tagline: string;
+}
+
+export const FACTORY_IMAGE_PRESETS: FactoryImagePreset[] = [
+  {
+    id: 'preset-apex-carbon',
+    name: 'Saint Apex Pro Toray Carbon',
+    category: 'carbon-pro',
+    url: '/saint_apex_pro_carbon.png',
+    tagline: 'Flagship 3K Carbon Competition Foil'
+  },
+  {
+    id: 'preset-double-carbon',
+    name: 'Saint Joe Double Carbon Pintail',
+    category: 'carbon-pro',
+    url: '/saint_joe_double_carbon.png',
+    tagline: 'Dual Toray 3K Carbon High-Tensile Weave'
+  },
+  {
+    id: 'preset-foamy-turquoise',
+    name: 'Saint Joe Foamy Pro Turquoise',
+    category: 'foamcore',
+    url: '/saint_joe_foamy.png',
+    tagline: 'Closed-Cell Foamcore & Double E-Glass'
+  },
+  {
+    id: 'preset-woody-50x20',
+    name: 'Saint Joe Woody 50x20 Standard',
+    category: 'woodcore',
+    url: '/saintjoeskim_woody_png.png',
+    tagline: 'Marine Hardwood Core & Cyan Rail Foil'
+  },
+  {
+    id: 'preset-fishtail-wave',
+    name: 'Saint Joe Speed Fishtail Wave Skim',
+    category: 'wave-skim',
+    url: '/saint_joe_fishtail.png',
+    tagline: 'Swallow Tail Outline & High Surface Planning'
+  },
+  {
+    id: 'preset-pin-tail-carbon',
+    name: 'Saint Pro Shape Pintail Carbon',
+    category: 'carbon-pro',
+    url: '/saintjoeskim_pin_tail_product_carbon.png',
+    tagline: 'Streamlined Pintail for Hollow Wave Hold'
+  },
+  {
+    id: 'preset-traction-combo',
+    name: 'Saint Joe Pro Deck Traction & Arch Bar',
+    category: 'traction-pads',
+    url: '/saintjoeskim_woody_50x20.png',
+    tagline: '10mm Center Arch + 30mm Kick Tail Pad'
+  },
+  {
+    id: 'preset-onedrop-poster',
+    name: 'One Drop Slide Official Event Poster',
+    category: 'apparel',
+    url: '/onedropslide_blog.jpg',
+    tagline: 'Official Zambales Skimboard Competition'
+  }
+];
 
 // Deterministic Order Management FSM
 export type OrderState =
